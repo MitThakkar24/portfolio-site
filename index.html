@@ -1,303 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Mit Thakkar — Portfolio</title>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Mit Thakkar - Data Analyst & BI Developer portfolio showcasing Power BI, Azure, SQL, Databricks and Microsoft Fabric projects." />
-  <meta name="theme-color" content="#0a0f14" />
+  <title>PIOTICON — Performance Dashboard</title>
+  <meta name="description" content="Integrated project management & controls — live performance dashboard." />
+  <meta name="theme-color" content="#0a4a84" />
   <style>
     :root {
-      --bg:#0a0f14;
-      --panel:#0e141b;
-      --text:#e8eef5;
-      --muted:#a7b3c2;
-      --border:rgba(255,255,255,.08);
-      --brand:#6ee7ff;
-      --brand-2:#9b8cff;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:16px;
-      --header:96px;
+      /* Brand */
+      --pi-blue:#0a4a84; --pi-blue-2:#0d5a9d; --pi-blue-deep:#062e55;
+      --pi-hero-glow:#1a73e8; --pi-text:#0f172a; --pi-muted:#4a5b72; --pi-ink:#0b1c33;
+      --cta:#ff9c33; --cta-dark:#d87f21;
+      /* Surfaces */
+      --bg:#f5f7fb; --white:#fff;
+      /* Effects */
+      --radius:18px; 
+      --shadow-md:0 10px 26px rgba(16,30,54,.10);
+      --shadow-sm:0 6px 16px rgba(16,30,54,.08);
+      --shadow-lg:0 18px 45px rgba(16,30,54,.14);
+      /* Power BI footer mask */
+      --mask-h:clamp(100px, 11vh, 115px);
     }
-    :root[data-theme='light'] {
-      --bg: #f8fafc;
-      --panel: #ffffff;
-      --text: #1d1d1f;
-      --muted: #4b5c6b;
-      --border: rgba(0,0,0,.08);
-      --brand: #2563eb;
-      --brand-2: #9333ea;
+    *{box-sizing:border-box;margin:0;padding:0}
+    body {font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--pi-text);}
+    a,button {cursor:pointer;transition:0.2s;}
+
+    /* NAV */
+    .nav {position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid #e8eef6;transition:box-shadow .2s;}
+    .nav.scrolled {box-shadow:0 6px 20px rgba(8,27,49,.08);}
+    .nav-inner {max-width:1200px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+    .brand {display:flex;align-items:center;gap:12px;font-weight:800;color:var(--pi-ink);text-decoration:none;}
+    .brand-logo {width:36px;height:36px;border-radius:10px;background:conic-gradient(from 120deg,#ffab40,#ffd180,#20d0ff,#92b4ff,#ffab40);box-shadow:0 0 0 2px #eef2f8;animation:spinLogo 12s linear infinite;}
+    @keyframes spinLogo {to { transform: rotate(360deg); }}
+    .links {display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+    .links a {text-decoration:none;color:#37455a;font-weight:600;position:relative;padding:8px 2px;}
+    .links a::after {content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#3fb6ff,#b388ff);opacity:0;transform:translateY(4px);transition:.2s;}
+    .links a:hover::after {opacity:1;transform:translateY(0);}
+    .btn {background:var(--cta);color:#201407;border:0;padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 8px 22px rgba(255,156,51,.25);}
+    .btn:hover {background:var(--cta-dark);transform:translateY(-2px);}
+
+    /* HERO */
+    .hero {position:relative;overflow:hidden;color:#f7fbff;
+      background:radial-gradient(1200px 520px at 50% -220px, var(--pi-hero-glow) 0%, #1a73e81a 60%, transparent 70%),linear-gradient(180deg, var(--pi-blue), var(--pi-blue-2) 40%, var(--pi-blue-deep));
     }
-    * { box-sizing: border-box; margin: 0; padding: 0 }
-    html,body { height:100%; scroll-behavior:smooth; }
-    body {
-      font:15.5px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 85% -15%, rgba(110,231,255,.06), transparent 60%),
-        radial-gradient(900px 500px at -10% 15%, rgba(155,140,255,.06), transparent 55%),
-        var(--bg);
-      letter-spacing:.2px;
-    }
-    a { color:inherit; text-decoration:none }
-    .container{ max-width:1180px; margin:0 auto; padding:20px }
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    header {
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:linear-gradient(to bottom, rgba(10,15,20,.92), rgba(10,15,20,.75));
-      border-bottom:1px solid var(--border);
-    }
-    .topbar{display:grid; grid-template-columns:220px 1fr auto; gap:14px; align-items:center}
-    .brand{display:flex; align-items:center; gap:12px; font-weight:700}
-    .brand .dot{width:10px;height:10px;border-radius:999px;background:radial-gradient(circle at 30% 30%,var(--brand),var(--brand-2));box-shadow:0 0 18px rgba(110,231,255,.35)}
-    .navwrap{justify-self:center;width:100%;max-width:760px;display:flex;padding:6px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.02);position:relative}
-    .nav{position:relative;display:flex;align-items:center;gap:6px;width:100%}
-    .nav a{flex:1;display:inline-flex;align-items:center;justify-content:center;min-width:90px;padding:10px 12px;color:var(--muted);border-radius:999px;white-space:nowrap;transition:color .18s ease}
-    .nav a:hover{color:#dbe7ff}
-    .nav a.is-active{color:var(--text)}
-    .nav .slider{position:absolute;top:0;left:0;height:100%;background:linear-gradient(135deg,rgba(110,231,255,.14),rgba(155,140,255,.14));border:1px solid var(--border);border-radius:999px;box-shadow:0 10px 30px rgba(110,231,255,.08);pointer-events:none;transition:transform .28s,width .28s}
-    .right{justify-self:end;display:flex;gap:10px;align-items:center}
-    .badge{padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:#cfe7ff;background:rgba(110,231,255,.05)}
-    .ham{display:none}
-    .theme-toggle{background:none;border:1px solid var(--border);border-radius:12px;padding:8px 10px;cursor:pointer;color:var(--text)}
-    @media (max-width:980px){ .topbar{grid-template-columns:1fr auto auto} .navwrap{display:none} .ham{display:inline-flex;padding:10px 12px;border:1px solid var(--border);border-radius:12px;color:#cfe7ff} }
-    .drawer{display:none;padding:10px;margin-top:10px}
-    .drawer.open{display:block}
-    .drawer a{display:block;padding:12px 14px;border:1px solid var(--border);border-radius:12px;color:var(--muted);margin-bottom:8px;background:rgba(255,255,255,.02)}
-    .drawer a.is-active{color:var(--text);background:linear-gradient(135deg,rgba(110,231,255,.14),rgba(155,140,255,.14))}
-    .hero{display:grid;grid-template-columns:minmax(520px,1.15fr) 0.85fr;gap:20px;align-items:start;padding:36px 0 2px}
-    .hero aside{align-self:start;max-width:520px}
-    @media(max-width:980px){.hero{grid-template-columns:1fr;padding:28px 0}.hero aside{max-width:none}}
-    h1{font-size:clamp(32px,3.6vw,52px);line-height:1.06;margin:6px 0 8px}
-    h2,h3{margin-bottom:6px}
-    .subtitle{color:var(--muted);font-size:clamp(15px,1.7vw,18px);max-width:760px;margin-bottom:10px}
-    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 10px}
-    .chip{border:1px solid var(--border);padding:8px 12px;border-radius:999px;color:#cfe7ff;background:rgba(110,231,255,.05)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:24px}
-    .col-8{grid-column:span 8} .col-4{grid-column:span 4}
-    @media(max-width:980px){.col-8,.col-4{grid-column:1/-1}}
-    .card{padding:18px}
-    .muted{color:var(--muted)}
-    .list{display:grid;gap:9px}
-    footer{padding:30px 0;color:var(--muted);text-align:center}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(135deg,rgba(110,231,255,.14),rgba(155,140,255,.14));cursor:pointer;transition:all .25s}
-    .btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,rgba(110,231,255,.25),rgba(155,140,255,.25))}
-    .fade-in{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease}
-    .panel,.card,.cta{opacity:0;transform:translateY(20px)}
-    .cta{position:relative;grid-column:1/-1;padding:22px 24px;display:grid;grid-template-columns:minmax(420px,1fr) auto;align-items:center;gap:24px;margin-top:26px;overflow:hidden}
-    .cta::after{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;background:radial-gradient(circle,rgba(110,231,255,.14),rgba(155,140,255,.12) 40%,transparent 60%);filter:blur(6px)}
-    #backToTop{position:fixed;bottom:24px;right:24px;padding:12px 14px;border-radius:50%;border:none;background:var(--brand);color:white;font-size:18px;display:none;cursor:pointer;box-shadow:var(--shadow)}
-    #backToTop.show{display:block}
+    .hero-inner {max-width:1200px;margin:auto;padding:62px 20px 34px;text-align:center;}
+    .hero h1 {font-size:clamp(30px,6vw,54px);line-height:1.1;letter-spacing:.2px;text-shadow:0 3px 18px rgba(10,30,70,.35);}
+    .hero .sub {margin:10px auto 26px;max-width:900px;font-size:clamp(15px,1.5vw,19px);opacity:.97;}
+    .divider {height:16px;background:radial-gradient(60% 100% at 50% -20%, rgba(255,255,255,.85), rgba(255,255,255,1) 70%);filter:drop-shadow(0 -8px 20px rgba(16,30,54,.22));}
+
+    /* REPORT */
+    .report-stage {height:min(86vh,1000px);min-height:620px;background:#fff;position:relative;overflow:hidden;}
+    .report-iframe {position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .5s;}
+    .report-iframe.loaded {opacity:1;}
+    .report-loading {position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,#ffffff,#fbfdff);z-index:3;}
+    .spinner {width:56px;height:56px;border-radius:50%;border:4px solid #e4ecf7;border-top-color:#3fb6ff;animation:spin .9s linear infinite;}
+    @keyframes spin {to{transform:rotate(360deg);}}
+    .report-mask {position:absolute;left:0;right:0;bottom:0;height:var(--mask-h);background:#ffffff;z-index:2;}
+
+    /* TILES */
+    .after-report {max-width:1200px;margin:28px auto 0;padding:0 20px 36px;}
+    .stats {display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    @media(max-width:900px){.stats{grid-template-columns:1fr 1fr;}}
+    @media(max-width:620px){.stats{grid-template-columns:1fr;}}
+    .stat {background:linear-gradient(180deg,#ffffff,#fbfdff);border:1px solid #e9eef6;border-radius:16px;padding:18px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s;opacity:0;transform:translateY(20px);}
+    .stat.visible {opacity:1;transform:translateY(0);}
+    .stat:hover {transform:translateY(-2px);box-shadow:var(--shadow-md);}
+    .stat h3 {margin:6px 0 10px;font-size:18px;color:var(--pi-ink);}
+    .stat p {margin:0;color:var(--pi-muted);font-size:14.5px;}
+
+    /* FOOTER */
+    .footer {margin-top:26px;padding:26px 20px 40px;text-align:center;color:#54657b;border-top:1px solid #e9eef6;background:#fbfdff;}
+    .foot-links {display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px;}
+    .foot-links a {color:#54657b;text-decoration:none;padding:6px 10px;border-radius:10px;}
+    .foot-links a:hover {background:#eef4fb;}
   </style>
 </head>
 <body>
-  <header id="hdr">
-    <div class="container">
-      <div class="topbar">
-        <div class="brand"><span class="dot"></span><div>Mit Thakkar</div></div>
-        <div class="navwrap"><div class="nav" id="nav">
-          <span class="slider" id="slider"></span>
-          <a href="#about" class="is-active">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#certs">Certifications</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
-        </div></div>
-        <div class="right">
-          <span class="badge">✓ Open to Opportunities</span>
-          <button class="theme-toggle" id="themeBtn">🌙</button>
-          <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer">Menu</button>
-        </div>
+  <!-- NAV -->
+  <header class="nav" id="topNav">
+    <div class="nav-inner">
+      <a class="brand" href="#"><span class="brand-logo"></span>PIOTICON</a>
+      <div class="links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#vision">Vision</a>
+        <a href="#mission">Mission</a>
+        <button class="btn" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">GET IN TOUCH</button>
       </div>
-      <nav id="drawer" class="drawer panel" aria-label="Mobile Menu">
-        <a href="#about" class="is-active">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#certs">Certifications</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-      </nav>
     </div>
   </header>
-  <main class="container">
-    <!-- HERO -->
-    <section id="about" class="hero sections">
-      <div>
-        <h1>Data Analyst & BI Developer</h1>
-        <p class="subtitle">Result-driven professional with 2+ years building insightful dashboards, scalable ETL pipelines and robust data models. Power BI, Azure, SQL, Python & Microsoft Fabric.</p>
-        <div class="chips">
-          <span class="chip">Power BI & DAX</span><span class="chip">Azure (ADF, Synapse)</span><span class="chip">Fabric</span><span class="chip">Databricks</span><span class="chip">SQL</span><span class="chip">Python</span>
-        </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap"><a class="btn" href="#projects">See Projects</a><a class="btn" href="#contact">Hire Me</a></div>
-      </div>
-      <aside class="panel card facts">
-        <h3>Quick Facts</h3>
-        <div class="muted">2+ yrs experience • 8+ domains • End-to-End lifecycle</div>
-        <div class="list">
-          <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
-          <a href="tel:+917575084084">+91-7575084084</a>
-          <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-      </aside>
-    </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Skill Set</h3>
-        <div class="list">
-          <div><strong>Primary:</strong> Power BI, DAX, SQL, Azure Synapse, Microsoft Fabric, ADF, Python</div>
-          <div><strong>Secondary:</strong> Databricks, ML/AI, EDA, Statistics</div>
-          <div><strong>Sources & Tools:</strong> REST APIs, Azure SQL, Blob, SharePoint, Excel</div>
-        </div>
-      </div>
-      <div class="col-4 panel card"><h3>What I Build</h3><ul class="list">
-        <li>Secure dashboards with RLS</li><li>Reliable ADF pipelines (incremental)</li><li>Databricks API ingestion</li><li>Clean semantic models & KPIs</li>
-      </ul></div>
-    </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>About Our Performance Dashboard</h1>
+      <p class="sub">Integrated Project Management & Controls: a single, elegant view of schedule, budget, and delivery performance — purpose-built for confident decisions.</p>
+    </div>
+    <div class="divider"></div>
+  </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Experience</h3>
-        <div class="panel" style="padding:14px">
-          <strong>Data Analyst • Data Engineer • Data Scientist — atQor</strong>
-          <div class="muted">Feb 2023 — Present</div>
-          <ul class="list" style="margin-top:8px">
-            <li>Designed ADF pipelines with incremental refresh.</li>
-            <li>Built Databricks pipelines → Azure SQL → Power BI.</li>
-            <li>Developed Power BI dashboards with YOY/MOM KPIs and RLS.</li>
-            <li>Monitored & resolved pipeline failures proactively.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-4 panel card"><h3>Highlights</h3><div class="list">
-        <div>Sources: SharePoint, Azure SQL, Blob, REST APIs, Excel</div>
-        <div>Focus: Modeling, KPIs, Governance (RLS)</div></div></div>
-    </section>
+  <!-- REPORT -->
+  <main id="dashboard" class="report-wrap" aria-label="Live Performance Dashboard">
+    <div class="report-stage">
+      <!-- Loading shimmer -->
+      <div class="report-loading" id="reportLoading"><div class="spinner"></div></div>
+      <iframe
+        class="report-iframe"
+        id="piReport"
+        title="PIOTICON Report"
+        loading="lazy"
+        src="https://app.powerbi.com/view?r=eyJrIjoiYWI4NjBkNGYtYWU0NS00ODA1LTk3MDItYmE0ZDhlN2QxOGZkIiwidCI6IjAyNGUyOGM2LTNmODItNGFjZS04NjQ2LThiNTQzOGZmZTlkMCJ9
+             &chromeless=true
+             &filterPaneEnabled=false
+             &navContentPaneEnabled=false
+             &pageNavigationEnabled=false
+             &displayMode=fitToWidth"
+        allowfullscreen></iframe>
+      <!-- Mask Power BI footer -->
+      <div class="report-mask"></div>
+    </div>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Projects</h3>
-        <div class="panel" style="padding:14px">
-          <strong>Sales Dashboard</strong> — Power BI • Azure SQL • ADF • Blob
-          <ul class="list" style="margin-top:8px">
-            <li>Modeled data & built CY/PY KPIs, YOY/MOM, top customers/products.</li><li>Implemented RLS and published in Service.</li>
-          </ul>
-        </div>
-        <div class="panel" style="padding:14px;margin-top:12px">
-          <strong>Bank Data Analysis</strong> — Power BI • Azure SQL • ADF
-          <ul class="list" style="margin-top:8px">
-            <li>ADF transformations with incremental load; revenue analytics by loan/deposit, LDR, trends.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-4 panel card"><h3>Toolbox</h3><div class="list">
-        <div>Visualization: Power BI, DAX</div><div>Engineering: ADF, Databricks, Azure SQL</div><div>Languages: SQL, Python</div><div>Platforms: Fabric, Synapse</div>
-      </div></div>
-    </section>
-
-    <!-- CERTS -->
-    <section id="certs" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Achievements & Certifications</h3>
-        <ul class="list">
-          <li>Azure AI Engineer Associate (AI-102) — Jun 2024</li>
-          <li>Fabric Analytics Engineer Associate (DP-600) — May 2024</li>
-          <li>Azure Data Scientist Associate (DP-100) — May 2024</li>
-          <li>Power BI Data Analyst (PL-300) — Jul 2023</li>
-          <li>Azure AI Fundamentals (AI-900) — Jul 2023</li>
-          <li>Excel for Intermediate Level — Oct 2023</li>
-          <li>Smart India Hackathon 2022 — Finalist</li>
-          <li>Databricks Lakehouse Platform Accreditation — Mar 2024</li>
-        </ul>
-      </div>
-      <div class="col-4 panel card"><h3>Strengths</h3><ul class="list">
-        <li>Client-first communication</li><li>Ownership from ingestion → insights</li><li>Reliability & scalability</li>
-      </ul></div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Education</h3>
-        <ul class="list">
-          <li><strong>B.E. Computer Engineering</strong> — GPERI • CGPA 8.45/10 (2019–2023)</li>
-          <li><strong>HSC</strong> — Krishna School of Science • 60% (2019)</li>
-          <li><strong>SSC</strong> — Krishna School of Science • 78% (2017)</li>
-        </ul>
-      </div>
-      <div class="col-4 panel card"><h3>Availability</h3><p class="muted">Remote or On-site • Full-time</p></div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="sections">
-      <div class="panel cta">
-        <div class="lead">
-          <h3>Let’s Work Together</h3>
-          <p>Have a role or project in mind? I’d love to help you turn data into decisions.</p>
-        </div>
-        <div class="actions">
-          <a class="btn" href="mailto:mitthakkar244@gmail.com">Email</a>
-          <a class="btn" href="tel:+917575084084">Call</a>
-          <a class="btn" href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn" href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
+    <!-- Tiles -->
+    <section class="after-report">
+      <div class="stats">
+        <article class="stat" id="vision">
+          <h3>Our Vision</h3>
+          <p>Empower enterprises to achieve peak productivity through innovative project management solutions.</p>
+        </article>
+        <article class="stat" id="mission">
+          <h3>Our Mission</h3>
+          <p>Harmonize talent, advanced technology, and unified systems to drive measurable business outcomes.</p>
+        </article>
+        <article class="stat">
+          <h3>Outcome Focus</h3>
+          <p>We optimize for speed-to-insight and decision quality, not just visuals.</p>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer><div class="container">&copy; <span id="y"></span> Mit Thakkar • Built with HTML/CSS/JS</div></footer>
-  <button id="backToTop" aria-label="Back to Top">↑</button>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>© <span id="yr"></span> PIOTICON. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#vision">Vision</a>
+      <a href="#mission">Mission</a>
+    </div>
+  </footer>
 
   <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Footer year
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Drawer toggle
-    const ham=document.getElementById('ham'),drawer=document.getElementById('drawer');
-    ham?.addEventListener('click',()=>{const open=drawer.classList.toggle('open');ham.setAttribute('aria-expanded',open?'true':'false');});
-    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+    // Nav shadow toggle
+    const topNav = document.getElementById('topNav');
+    const onScroll = () => topNav.classList.toggle('scrolled', window.scrollY > 6);
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
 
-    // Header CSS var
-    const hdr=document.getElementById('hdr'),setHeaderVar=()=>document.documentElement.style.setProperty('--header',hdr.getBoundingClientRect().height+'px');
-    setHeaderVar();new ResizeObserver(setHeaderVar).observe(hdr);window.addEventListener('resize',setHeaderVar,{passive:true});
+    // Iframe loader fade
+    const report = document.getElementById("piReport");
+    report.onload = () => {
+      document.getElementById("reportLoading").style.display="none";
+      report.classList.add("loaded");
+    };
 
-    // Nav slider
-    const nav=document.getElementById('nav'),slider=document.getElementById('slider'),links=[...nav.querySelectorAll('a')];
-    const aboutLink=links.find(l=>l.getAttribute('href')==="#about");
-    function setSliderTo(el){if(!el)return;slider.style.width=`${el.offsetWidth}px`;slider.style.transform=`translate3d(${el.offsetLeft}px,0,0)`;links.forEach(l=>l.classList.toggle('is-active',l===el));drawer?.querySelectorAll('a').forEach(a=>a.classList.toggle('is-active',a.getAttribute('href')===el.getAttribute('href')));}
-    links.forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href'),section=document.querySelector(id);if(section){e.preventDefault();section.scrollIntoView({behavior:'smooth'});}setSliderTo(a);}));
-    // IntersectionObserver for active link
-    const sections=[...document.querySelectorAll('.sections')],io=new IntersectionObserver(entries=>{if(window.scrollY<parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header'))-2){setSliderTo(aboutLink);return;}entries.forEach(e=>{if(e.isIntersecting){const id='#'+e.target.id;const match=links.find(l=>l.getAttribute('href')===id);if(match)setSliderTo(match);}});},{rootMargin:'-60% 0px -35% 0px',threshold:.01});
-    sections.forEach(s=>io.observe(s));
-    requestAnimationFrame(()=>setSliderTo(aboutLink||links[0]));
-
-    // Fade-in animation
-    const fadeObs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('fade-in');fadeObs.unobserve(entry.target);}});},{threshold:0.15});
-    document.querySelectorAll('.panel,.card,.cta').forEach(el=>fadeObs.observe(el));
-
-    // Back-to-top button
-    const backToTop=document.getElementById('backToTop');
-    window.addEventListener('scroll',()=>{if(window.scrollY>300)backToTop.classList.add('show');else backToTop.classList.remove('show');});
-    backToTop.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
-
-    // Theme toggle
-    const themeBtn=document.getElementById("themeBtn");
-    function setTheme(mode){document.documentElement.dataset.theme=mode;localStorage.setItem("theme",mode);themeBtn.innerText=mode==="dark"?"🌙":"☀️";}
-    themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
-    setTheme(localStorage.getItem("theme")||"dark");
+    // Animate tiles when visible
+    const cards = document.querySelectorAll('.stat');
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, {threshold:0.2});
+    cards.forEach(c=>observer.observe(c));
   </script>
 </body>
 </html>
