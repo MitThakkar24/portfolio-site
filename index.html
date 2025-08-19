@@ -2,129 +2,176 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Mit Thakkar — Data Analyst & BI Developer</title>
+  <title>Mit Thakkar — Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0f14" />
-  <meta name="description" content="Portfolio of Mit Thakkar — Data Analyst & BI Developer specializing in Power BI, Azure, SQL, and scalable data engineering." />
-  <meta property="og:title" content="Mit Thakkar — Data Analyst & BI Developer" />
-  <meta property="og:description" content="Power BI • Azure • SQL • Data Engineering • Microsoft Fabric" />
+  <meta name="theme-color" content="#0a0f14" />
   <style>
+    /* ====== THEME ====== */
     :root{
-      --bg:#0b0f14;
-      --panel:#0f1620;
-      --muted:#a9b1bd;
-      --text:#e6edf3;
+      --bg:#0a0f14;
+      --panel:#0e141b;
+      --text:#e8eef5;
+      --muted:#a7b3c2;
+      --border:rgba(255,255,255,.08);
       --brand:#6ee7ff;
       --brand-2:#9b8cff;
-      --border:rgba(255,255,255,.08);
-      --glow:0 0 30px rgba(110,231,255,.15);
-      --radius:18px;
       --shadow:0 10px 30px rgba(0,0,0,.35);
-      --code:#0b1220;
+      --radius:16px;
     }
-    *{box-sizing:border-box} html,body{height:100%}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
-      color:var(--text); background:radial-gradient(1200px 600px at 80% -10%, rgba(110,231,255,.06), transparent 50%),
-                          radial-gradient(900px 500px at -10% 10%, rgba(155,140,255,.06), transparent 50%),
-                          var(--bg);
+      margin:0; font:15.5px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 85% -15%, rgba(110,231,255,.06), transparent 60%),
+        radial-gradient(900px 500px at -10% 15%, rgba(155,140,255,.06), transparent 55%),
+        var(--bg);
       letter-spacing:.2px;
     }
-    a{color:var(--brand); text-decoration:none}
-    a:hover{opacity:.9}
-    .container{max-width:1120px; margin:0 auto; padding:28px 20px}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1180px; margin:0 auto; padding:20px}
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    /* ====== HEADER (fixed) ====== */
     header{
-      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(10px);
-      background:linear-gradient(to bottom, rgba(11,15,20,.85), rgba(11,15,20,.65));
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(to bottom, rgba(10,15,20,.92), rgba(10,15,20,.75));
       border-bottom:1px solid var(--border);
     }
-    .nav{display:flex; align-items:center; gap:20px; justify-content:space-between}
+    .topbar{
+      display:grid; grid-template-columns:220px 1fr 220px; gap:14px; align-items:center;
+    }
+    /* brand */
     .brand{display:flex; align-items:center; gap:12px; font-weight:700}
     .brand .dot{
-      width:12px; height:12px; border-radius:999px;
+      width:10px; height:10px; border-radius:999px;
       background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2));
-      box-shadow:var(--glow);
+      box-shadow:0 0 18px rgba(110,231,255,.35);
     }
-    .links{display:flex; gap:14px; flex-wrap:wrap}
-    .links a{
-      padding:8px 12px; border:1px solid var(--border); border-radius:12px; color:var(--muted)
+    /* segmented nav */
+    .navwrap{
+      justify-self:center; width:100%; max-width:680px;
+      display:flex; align-items:center; padding:6px; gap:6px;
+      border-radius:999px; border:1px solid var(--border);
+      background:rgba(255,255,255,.02);
+      position:relative;
     }
-    .links a.active{color:var(--text); border-color:transparent; background:linear-gradient(135deg, rgba(110,231,255,.12), rgba(155,140,255,.12)); box-shadow:var(--glow)}
-    .hero{
-      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:48px 0 10px;
+    .nav{
+      display:flex; align-items:center; gap:6px; width:100%;
+      position:relative;
     }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding:28px 0} }
-    h1{font-size:clamp(28px, 3.5vw, 46px); line-height:1.15; margin:8px 0 12px}
-    .subtitle{color:var(--muted); font-size:clamp(15px, 1.8vw, 18px)}
-    .chips{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 0}
-    .chip{
-      border:1px solid var(--border); padding:8px 12px; border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)
+    .nav a{
+      flex:1 1 auto; text-align:center; padding:10px 12px; color:var(--muted);
+      border-radius:999px; position:relative; transition:color .2s ease;
     }
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)
+    .nav a:hover{color:#dbe7ff}
+    .nav a.is-active{color:var(--text)}
+    .nav .slider{
+      position:absolute; top:6px; bottom:6px; width:90px;
+      border-radius:999px; background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(110,231,255,.08);
+      transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s;
+      pointer-events:none;
     }
-    .grid{
-      display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px
+    /* badge / ctas */
+    .right{
+      justify-self:end; display:flex; gap:10px; align-items:center;
     }
-    .col-8{grid-column:span 8} .col-4{grid-column:span 4}
-    @media (max-width: 900px){ .col-8,.col-4{grid-column:1/-1} }
-    .card{padding:18px}
-    .card h3{margin:0 0 6px; font-size:18px}
-    .muted{color:var(--muted)}
-    .divider{height:1px; background:var(--border); margin:12px 0}
-    .list{display:grid; gap:12px}
-    .tag{display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:10px; margin:6px 6px 0 0; color:#cbd5e1}
-    .kpi{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px}
-    .kpi .k{padding:14px; border:1px dashed var(--border); border-radius:14px; text-align:center}
-    .k .v{font-weight:700; font-size:18px}
-    footer{padding:32px 0; color:var(--muted); text-align:center}
-    .contact{
-      display:grid; gap:10px; margin-top:10px
-    }
-    .contact a{display:flex; align-items:center; gap:10px}
-    .bullet{width:6px; height:6px; border-radius:50%; background:var(--brand)}
-    .timeline{display:grid; gap:14px}
-    .item{padding:14px; border:1px solid var(--border); border-radius:14px}
-    .item h4{margin:2px 0 4px}
-    .domain{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
-    .shine{
-      position:relative; overflow:hidden
-    }
-    .shine::after{
-      content:""; position:absolute; inset:-100% -50% auto; height:200%;
-      background:linear-gradient(120deg, transparent, rgba(255,255,255,.06), transparent);
-      transform:rotate(8deg)
-    }
-    .shine:hover::after{animation:shine 1.8s forwards}
-    @keyframes shine{to{transform:translateX(120%) rotate(8deg)}}
-    .code{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background:var(--code); padding:12px; border:1px solid var(--border); border-radius:10px; color:#cbd5e1
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
-      border:1px solid var(--border); background:rgba(255,255,255,.02)
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
+      border:1px solid var(--border); border-radius:999px; color:#cfe7ff;
+      background:rgba(110,231,255,.05);
+      white-space:nowrap;
     }
     .btn{
-      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--border);
-      background:linear-gradient(135deg, rgba(110,231,255,.12), rgba(155,140,255,.12)); color:var(--text);
-      box-shadow:var(--glow); cursor:pointer
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+      border-radius:12px; border:1px solid var(--border); cursor:pointer;
+      background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
     }
-    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    .ham{display:none}
+    @media (max-width: 980px){
+      .topbar{grid-template-columns:1fr auto auto}
+      .navwrap{display:none}
+      .ham{display:inline-flex; padding:10px 12px; border:1px solid var(--border); border-radius:12px}
+    }
+    /* mobile drawer */
+    .drawer{
+      display:none; padding:10px; margin-top:10px
+    }
+    .drawer.open{display:block}
+    .drawer a{
+      display:block; padding:12px 14px; border:1px solid var(--border); border-radius:12px;
+      color:var(--muted); margin-bottom:8px; background:rgba(255,255,255,.02)
+    }
+    .drawer a.is-active{color:var(--text); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
+    /* ====== HERO ====== */
+    .hero{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:36px 0 8px;
+    }
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr; padding:26px 0} }
+    h1{font-size:clamp(28px, 3.4vw, 46px); line-height:1.12; margin:6px 0 10px}
+    .subtitle{color:var(--muted); font-size:clamp(15px, 1.7vw, 18px)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .chip{border:1px solid var(--border); padding:8px 12px; border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)}
+
+    /* ====== LAYOUT ====== */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px}
+    .col-8{grid-column:span 8} .col-4{grid-column:span 4}
+    @media (max-width: 980px){ .col-8,.col-4{grid-column:1/-1} }
+    .card{padding:18px} .muted{color:var(--muted)}
+    .divider{height:1px; background:var(--border); margin:12px 0}
+    .list{display:grid; gap:10px}
+
+    /* ====== UTIL ====== */
     .sections{scroll-margin-top:88px}
+    footer{padding:30px 0; color:var(--muted); text-align:center}
   </style>
 </head>
 <body>
+  <!-- ====== HEADER ====== -->
   <header>
-    <div class="container nav">
-      <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
-        <span>Mit Thakkar</span>
-        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13l4 4L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Open to Opportunities</span>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <div>Mit Thakkar</div>
+          </div>
+        </div>
+
+        <!-- centered segmented nav -->
+        <div class="navwrap" aria-label="Primary">
+          <div class="nav" id="nav">
+            <span class="slider" id="slider" style="transform:translateX(0)"></span>
+            <a href="#about" class="is-active">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#certs">Certifications</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <!-- right side -->
+        <div class="right">
+          <span class="badge" title="Currently looking">
+            ✓ Open to Opportunities
+          </span>
+          <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer">Menu</button>
+        </div>
       </div>
-      <nav class="links">
-        <a href="#about" class="active">About</a>
+
+      <!-- mobile drawer -->
+      <nav id="drawer" class="drawer panel" aria-label="Mobile Menu">
+        <a href="#about" class="is-active">About</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
@@ -135,44 +182,39 @@
     </div>
   </header>
 
+  <!-- ====== MAIN ====== -->
   <main class="container">
     <!-- HERO -->
     <section id="about" class="hero sections">
       <div>
         <h1>Data Analyst & BI Developer</h1>
         <p class="subtitle">
-          Result-driven professional with 2+ years building insightful dashboards, scalable ETL pipelines, and robust data models across healthcare, logistics, education, and more. Strong in Power BI, Azure, SQL, Python, and Microsoft Fabric.
+          Result-driven professional with 2+ years building insightful dashboards, scalable ETL pipelines and robust data models. Power BI, Azure, SQL, Python & Microsoft Fabric.
         </p>
         <div class="chips">
           <span class="chip">Power BI & DAX</span>
           <span class="chip">Azure (ADF, Synapse)</span>
-          <span class="chip">Microsoft Fabric</span>
-          <span class="chip">SQL & Databricks</span>
+          <span class="chip">Fabric</span>
+          <span class="chip">Databricks</span>
+          <span class="chip">SQL</span>
           <span class="chip">Python</span>
-          <span class="chip">RLS • YOY/MOM KPIs</span>
         </div>
-        <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap">
-          <button class="btn shine" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            Hire Me
-          </button>
-          <a class="links active" href="#projects" style="padding:12px 16px; border-radius:12px">See Projects</a>
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn" href="#contact">Hire Me</a>
         </div>
       </div>
-
       <aside class="panel card">
-        <h3>Quick Facts</h3>
-        <div class="kpi">
-          <div class="k"><div class="v">2+ yrs</div><div class="muted">Experience</div></div>
-          <div class="k"><div class="v">8+</div><div class="muted">Domains</div></div>
-          <div class="k"><div class="v">End-to-End</div><div class="muted">Data Lifecycle</div></div>
-        </div>
-        <div class="divider"></div>
-        <div class="contact">
-          <a href="mailto:mitthakkar244@gmail.com" aria-label="Email"><span class="bullet"></span> mitthakkar244@gmail.com</a>
-          <a href="tel:+917575084084" aria-label="Phone"><span class="bullet"></span> +91-7575084084</a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><span class="bullet"></span> LinkedIn</a>
-          <a href="https://github.com/" target="_blank" rel="noreferrer"><span class="bullet"></span> GitHub</a>
+        <h3 style="margin:0 0 8px">Quick Facts</h3>
+        <div class="list">
+          <div class="muted">2+ yrs experience • 8+ domains • End-to-End lifecycle</div>
+          <div class="divider"></div>
+          <div class="list">
+            <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
+            <a href="tel:+917575084084">+91-7575084084</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </div>
       </aside>
     </section>
@@ -182,46 +224,18 @@
       <div class="col-8 panel card">
         <h3>Skill Set</h3>
         <div class="list">
-          <div>
-            <strong>Primary:</strong>
-            <span class="tag">SQL (DDL/DML)</span>
-            <span class="tag">Power BI</span>
-            <span class="tag">DAX</span>
-            <span class="tag">Azure Synapse</span>
-            <span class="tag">Microsoft Fabric</span>
-            <span class="tag">ADF Pipelines</span>
-            <span class="tag">Python (Pandas, NumPy, scikit-learn, TensorFlow)</span>
-            <span class="tag">Excel (Pivot, Charts)</span>
-          </div>
-          <div>
-            <strong>Secondary:</strong>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Deep Learning</span>
-            <span class="tag">EDA</span>
-            <span class="tag">Statistics</span>
-            <span class="tag">Data Science & AI</span>
-          </div>
-          <div>
-            <strong>Databases & Tools:</strong>
-            <span class="tag">Databricks</span>
-            <span class="tag">Anaconda</span>
-            <span class="tag">SSMS</span>
-            <span class="tag">Azure SQL</span>
-            <span class="tag">Cosmos DB (Basic)</span>
-            <span class="tag">Snowflake (Basic)</span>
-            <span class="tag">SharePoint</span>
-            <span class="tag">Azure Blob</span>
-            <span class="tag">REST APIs</span>
-          </div>
+          <div><strong>Primary:</strong> Power BI, DAX, SQL, Azure Synapse, Microsoft Fabric, ADF, Python</div>
+          <div><strong>Secondary:</strong> Databricks, ML/AI, EDA, Statistics</div>
+          <div><strong>Sources & Tools:</strong> REST APIs, Azure SQL, Blob, SharePoint, Excel</div>
         </div>
       </div>
       <div class="col-4 panel card">
-        <h3>What I Love Building</h3>
+        <h3>What I Build</h3>
         <ul class="list">
-          <li>Insightful, secure <strong>Power BI</strong> dashboards with RLS</li>
-          <li>Reliable <strong>ADF</strong> pipelines & incremental refresh</li>
-          <li><strong>Databricks</strong> notebooks consuming complex APIs</li>
-          <li>Clean semantic models with robust <strong>DAX</strong> KPIs (YOY/MOM)</li>
+          <li>Secure dashboards with RLS</li>
+          <li>Reliable ADF pipelines (incremental)</li>
+          <li>Databricks API ingestion</li>
+          <li>Clean semantic models & KPIs</li>
         </ul>
       </div>
     </section>
@@ -230,31 +244,24 @@
     <section id="experience" class="grid sections">
       <div class="col-8 panel card">
         <h3>Experience</h3>
-        <div class="timeline">
-          <div class="item">
-            <h4>Data Analyst • Data Engineer • Data Scientist — <span class="muted">atQor</span></h4>
-            <div class="muted">Feb 2023 — Present • Healthcare, Sales, Transportation, Help Desk, Education, Logistics, Project Management</div>
+        <div class="list">
+          <div class="panel" style="padding:14px">
+            <strong>Data Analyst • Data Engineer • Data Scientist — atQor</strong>
+            <div class="muted">Feb 2023 — Present</div>
             <ul class="list" style="margin-top:8px">
-              <li>Primary data point-of-contact with clients; convert business needs into technical solutions.</li>
-              <li>Designed & orchestrated <strong>ADF</strong> pipelines with <strong>incremental refresh</strong> for scalable ingestion.</li>
-              <li>Built <strong>Databricks</strong> pipelines to extract/transform <strong>REST API</strong> data → Azure SQL → Power BI.</li>
-              <li>Developed & maintained <strong>Power BI</strong> dashboards with complex KPIs (YOY/MOM) and <strong>RLS</strong>.</li>
-              <li>Optimized Python transformations for high-volume processing; led data migration while ensuring integrity.</li>
-              <li>Proactive monitoring & resolution of pipeline failures to maximize reliability and uptime.</li>
+              <li>Designed ADF pipelines with incremental refresh.</li>
+              <li>Built Databricks pipelines → Azure SQL → Power BI.</li>
+              <li>Power BI dashboards with YOY/MOM KPIs and RLS.</li>
+              <li>Monitored & resolved pipeline failures proactively.</li>
             </ul>
-            <div class="domain">
-              <span class="tag">Client Communication</span>
-              <span class="tag">End-to-End Ownership</span>
-              <span class="tag">Data Quality</span>
-            </div>
           </div>
         </div>
       </div>
       <div class="col-4 panel card">
         <h3>Highlights</h3>
         <div class="list">
-          <div class="code">Sources: SharePoint • Azure SQL • Blob • REST APIs • Excel</div>
-          <div class="code">Strengths: Modeling • KPIs • RLS • Incremental/Historical Loads</div>
+          <div>Sources: SharePoint, Azure SQL, Blob, REST APIs, Excel</div>
+          <div>Focus: Modeling, KPIs, Governance (RLS)</div>
         </div>
       </div>
     </section>
@@ -263,32 +270,27 @@
     <section id="projects" class="grid sections">
       <div class="col-8 panel card">
         <h3>Projects</h3>
-        <div class="item">
-          <h4>Sales Dashboard</h4>
-          <div class="muted">Power BI • Azure SQL • ADF • Azure Blob</div>
-          <ul class="list">
-            <li>Moved flat-file data to SQL, designed model & relationships, and built reports.</li>
-            <li>KPIs: CY vs PY sales, YOY/MOM growth, Top customers/products, etc.</li>
-            <li>Implemented <strong>RLS</strong> and deployed to Power BI Service.</li>
+        <div class="panel" style="padding:14px">
+          <strong>Sales Dashboard</strong> — Power BI • Azure SQL • ADF • Blob
+          <ul class="list" style="margin-top:8px">
+            <li>Modeled data & built CY/PY KPIs, YOY/MOM, top customers/products.</li>
+            <li>Implemented RLS and deployed to Service.</li>
           </ul>
         </div>
-        <div class="divider"></div>
-        <div class="item">
-          <h4>Bank Data Analysis</h4>
-          <div class="muted">Power BI • Azure SQL • ADF • Blob</div>
-          <ul class="list">
-            <li>ADF transformations with <strong>incremental load</strong> policy.</li>
-            <li>Built revenue analytics by loan/deposit, LDR ratio, YOY/MOM trends, client-level insights.</li>
+        <div class="panel" style="padding:14px; margin-top:12px">
+          <strong>Bank Data Analysis</strong> — Power BI • Azure SQL • ADF
+          <ul class="list" style="margin-top:8px">
+            <li>ADF transformations with incremental policy; revenue analytics by loan/deposit, LDR, trends.</li>
           </ul>
         </div>
       </div>
       <div class="col-4 panel card">
-        <h3>Toolbox Snapshot</h3>
+        <h3>Toolbox</h3>
         <div class="list">
-          <div><strong>Visualization:</strong> Power BI, DAX</div>
-          <div><strong>Engineering:</strong> ADF, Databricks, Azure SQL</div>
-          <div><strong>Languages:</strong> SQL, Python</div>
-          <div><strong>Platforms:</strong> Microsoft Fabric, Synapse</div>
+          <div>Visualization: Power BI, DAX</div>
+          <div>Engineering: ADF, Databricks, Azure SQL</div>
+          <div>Languages: SQL, Python</div>
+          <div>Platforms: Fabric, Synapse</div>
         </div>
       </div>
     </section>
@@ -298,23 +300,23 @@
       <div class="col-8 panel card">
         <h3>Achievements & Certifications</h3>
         <ul class="list">
-          <li>Microsoft Certified: <strong>Azure AI Engineer Associate (AI-102)</strong> — Jun 2024</li>
-          <li>Microsoft Certified: <strong>Fabric Analytics Engineer Associate (DP-600)</strong> — May 2024</li>
-          <li>Microsoft Certified: <strong>Azure Data Scientist Associate (DP-100)</strong> — May 2024</li>
-          <li>Microsoft Certified: <strong>Power BI Data Analyst (PL-300)</strong> — Jul 2023</li>
-          <li>Microsoft Certified: <strong>Azure AI Fundamentals (AI-900)</strong> — Jul 2023</li>
-          <li>Great Learning: <strong>Excel for Intermediate Level</strong> — Oct 2023</li>
-          <li><strong>Smart India Hackathon 2022</strong> — Finalist (Aug 2022)</li>
-          <li>IBM: <strong>Python Basics for Data Science</strong> — Oct 2022</li>
-          <li>Databricks <strong>Lakehouse Platform Accreditation</strong> — Mar 2024</li>
+          <li>Azure AI Engineer Associate (AI-102) — Jun 2024</li>
+          <li>Fabric Analytics Engineer Associate (DP-600) — May 2024</li>
+          <li>Azure Data Scientist Associate (DP-100) — May 2024</li>
+          <li>Power BI Data Analyst (PL-300) — Jul 2023</li>
+          <li>Azure AI Fundamentals (AI-900) — Jul 2023</li>
+          <li>Excel for Intermediate Level — Oct 2023</li>
+          <li>Smart India Hackathon 2022 — Finalist</li>
+          <li>Databricks Lakehouse Platform Accreditation — Mar 2024</li>
         </ul>
       </div>
       <div class="col-4 panel card">
-        <h3>Focus Areas</h3>
-        <div class="list">
-          <div class="code">KPI Design • Data Modeling • Governance (RLS)</div>
-          <div class="code">Pipelines • API Ingestion • Reliability</div>
-        </div>
+        <h3>Strengths</h3>
+        <ul class="list">
+          <li>Client-first communication</li>
+          <li>Ownership from ingestion → insights</li>
+          <li>Reliability & scalability</li>
+        </ul>
       </div>
     </section>
 
@@ -324,17 +326,13 @@
         <h3>Education</h3>
         <ul class="list">
           <li><strong>B.E. Computer Engineering</strong> — Gujarat Power Engineering & Research Institute • CGPA 8.45/10 (2019–2023)</li>
-          <li><strong>HSC</strong> — Krishna School of Science, Patan (GSEB) • 60% (2019)</li>
-          <li><strong>SSC</strong> — Krishna School of Science, Patan (GSEB) • 78% (2017)</li>
+          <li><strong>HSC</strong> — Krishna School of Science (GSEB) • 60% (2019)</li>
+          <li><strong>SSC</strong> — Krishna School of Science (GSEB) • 78% (2017)</li>
         </ul>
       </div>
       <div class="col-4 panel card">
-        <h3>Strengths</h3>
-        <ul class="list">
-          <li>Client-first mindset & clear communication</li>
-          <li>Ownership from ingestion → insights</li>
-          <li>Quality, reliability, and scalability</li>
-        </ul>
+        <h3>Availability</h3>
+        <p class="muted">Remote or On-site • Full-time</p>
       </div>
     </section>
 
@@ -343,20 +341,10 @@
       <div class="col-8 panel card">
         <h3>Let’s Work Together</h3>
         <p class="muted">Have a role or project in mind? I’d love to help you turn data into decisions.</p>
-        <div class="contact" style="margin-top:14px">
-          <a href="mailto:mitthakkar244@gmail.com" class="shine pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
-            Email: mitthakkar244@gmail.com
-          </a>
-          <a href="tel:+917575084084" class="pill">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v2a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.06 6.18 2 2 0 0 1 4 4h2a2 2 0 0 1 2 1.72c.12.89.32 1.76.61 2.6a2 2 0 0 1-.45 2.11L7.09 11a16 16 0 0 0 6 6l.57-1.12a2 2 0 0 1 2.11-.45c.84.29 1.71.49 2.6.61A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/></svg>
-            Phone: +91-7575084084
-          </a>
+        <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
+          <a class="btn" href="mailto:mitthakkar244@gmail.com">Email: mitthakkar244@gmail.com</a>
+          <a class="btn" href="tel:+917575084084">Call: +91-7575084084</a>
         </div>
-      </div>
-      <div class="col-4 panel card">
-        <h3>Availability</h3>
-        <p class="muted">Remote or On-site • Full-time</p>
       </div>
     </section>
   </main>
@@ -366,32 +354,67 @@
   </footer>
 
   <script>
-    // Set current year
+    // Current year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Smooth active link state
-    const sections = [...document.querySelectorAll('.sections')];
-    const navLinks = [...document.querySelectorAll('.links a')];
+    // Mobile drawer
+    const ham = document.getElementById('ham');
+    const drawer = document.getElementById('drawer');
+    ham?.addEventListener('click', ()=>{
+      const open = drawer.classList.toggle('open');
+      ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    drawer.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>drawer.classList.remove('open'));
+    });
 
+    // Segmented nav slider (desktop)
+    const nav = document.getElementById('nav');
+    const slider = document.getElementById('slider');
+    const links = [...nav.querySelectorAll('a')];
+
+    function syncSlider(target){
+      const rect = target.getBoundingClientRect();
+      const parent = nav.getBoundingClientRect();
+      const w = Math.max(86, rect.width);              // consistent width
+      const x = rect.left - parent.left;
+      slider.style.width = w + 'px';
+      slider.style.transform = `translateX(${x}px)`;
+      links.forEach(l=>l.classList.toggle('is-active', l === target));
+      // mirror state to mobile drawer
+      drawer.querySelectorAll('a').forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === target.getAttribute('href')));
+    }
+
+    // initialize slider at first active link
+    const initial = nav.querySelector('.is-active') || links[0];
+    syncSlider(initial);
+
+    // click + intersection observer to update active state
+    links.forEach(a=>{
+      a.addEventListener('click', e=>{
+        // smooth scroll
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){
+          e.preventDefault();
+          el.scrollIntoView({behavior:'smooth'});
+        }
+        syncSlider(a);
+      });
+    });
+
+    // Keep active state while scrolling
+    const sections = [...document.querySelectorAll('.sections')];
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
-          const id = e.target.id;
-          navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+          const id = '#' + e.target.id;
+          const match = links.find(l=>l.getAttribute('href')===id);
+          if(match) syncSlider(match);
         }
       });
-    },{rootMargin:'-50% 0px -40% 0px', threshold:.01});
+    },{rootMargin:'-55% 0px -40% 0px', threshold:.01});
     sections.forEach(s=>io.observe(s));
-
-    // Keyboard nav
-    document.addEventListener('keydown', (ev)=>{
-      if(ev.key.toLowerCase() === 'g' && (ev.ctrlKey || ev.metaKey)){
-        ev.preventDefault();
-        document.querySelector('.brand').scrollIntoView({behavior:'smooth'});
-      }
-    });
   </script>
-
-  <!-- Source: :contentReference[oaicite:0]{index=0} -->
 </body>
 </html>
