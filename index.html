@@ -533,6 +533,122 @@
       letter-spacing: 0.5px;
     }
     
+    /* FIXED EXPERIENCE SECTION ALIGNMENT */
+    .experience-item {
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border-left: 4px solid var(--brand);
+      transition: all 0.3s ease;
+      margin-top: 16px;
+    }
+    
+    .experience-item:hover {
+      border-left-color: var(--brand-2);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .experience-title {
+      color: var(--brand);
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0;
+    }
+    
+    .experience-duration {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    
+    .experience-description {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    
+    /* Fixed bullet point alignment */
+    .experience-achievements {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .experience-achievements li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    .achievement-icon {
+      color: var(--brand);
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    
+    .achievement-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .achievement-title {
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .achievement-description {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    
+    /* Mobile optimizations for experience */
+    @media (max-width: 768px) {
+      .experience-item {
+        padding: 20px 16px;
+      }
+      
+      .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      
+      .experience-title {
+        font-size: 16px;
+      }
+      
+      .experience-achievements li {
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+      }
+      
+      .achievement-icon {
+        font-size: 14px;
+      }
+    }
+    
     /* Mobile optimizations for projects */
     @media (max-width: 768px) {
       .project-item {
@@ -682,7 +798,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .scroll-top:hover {
+    .scroll-top.hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(110,231,255,.3);
     }
@@ -892,25 +1008,55 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE SECTION -->
+    <!-- FIXED EXPERIENCE SECTION -->
     <section id="experience" class="grid sections">
       <div class="col-8 panel card">
         <h3>Professional Experience</h3>
-        <div class="project-item" style="margin-top:16px">
-          <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:8px">
-            <strong style="color:var(--brand)">Multi-Role Data Professional — atQor</strong>
+        <div class="experience-item">
+          <div class="experience-header">
+            <h4 class="experience-title">Multi-Role Data Professional — atQor</h4>
             <span class="cert-badge">Current</span>
           </div>
-          <div class="muted" style="margin-bottom:12px">February 2023 — Present (1.5+ years)</div>
-          <p style="color:var(--muted); margin-bottom:12px">
+          <div class="experience-duration">February 2023 — Present (1.5+ years)</div>
+          <p class="experience-description">
             Serving as Data Analyst, Data Engineer, and Data Scientist across multiple client engagements, delivering end-to-end analytics solutions.
           </p>
-          <ul class="project-features">
-            <li><strong>ETL Architecture:</strong> Designed robust ADF pipelines with incremental refresh strategies, reducing data processing time by 60%</li>
-            <li><strong>Advanced Analytics:</strong> Built 15+ Power BI dashboards with complex DAX measures, YOY/MOM comparisons, and drill-through capabilities</li>
-            <li><strong>Security & Governance:</strong> Implemented Row-Level Security (RLS) across multiple data models, ensuring compliant data access</li>
-            <li><strong>Integration Expertise:</strong> Orchestrated data flows from Databricks → Azure SQL → Power BI with real-time monitoring</li>
-            <li><strong>Performance Optimization:</strong> Proactively monitored and resolved pipeline failures, maintaining 99.5% uptime</li>
+          <ul class="experience-achievements">
+            <li>
+              <span class="achievement-icon">🏗️</span>
+              <div class="achievement-content">
+                <div class="achievement-title">ETL Architecture</div>
+                <div class="achievement-description">Designed robust ADF pipelines with incremental refresh strategies, reducing data processing time by 60%</div>
+              </div>
+            </li>
+            <li>
+              <span class="achievement-icon">📊</span>
+              <div class="achievement-content">
+                <div class="achievement-title">Advanced Analytics</div>
+                <div class="achievement-description">Built 15+ Power BI dashboards with complex DAX measures, YOY/MOM comparisons, and drill-through capabilities</div>
+              </div>
+            </li>
+            <li>
+              <span class="achievement-icon">🔒</span>
+              <div class="achievement-content">
+                <div class="achievement-title">Security & Governance</div>
+                <div class="achievement-description">Implemented Row-Level Security (RLS) across multiple data models, ensuring compliant data access</div>
+              </div>
+            </li>
+            <li>
+              <span class="achievement-icon">🔄</span>
+              <div class="achievement-content">
+                <div class="achievement-title">Integration Expertise</div>
+                <div class="achievement-description">Orchestrated data flows from Databricks → Azure SQL → Power BI with real-time monitoring</div>
+              </div>
+            </li>
+            <li>
+              <span class="achievement-icon">⚡</span>
+              <div class="achievement-content">
+                <div class="achievement-title">Performance Optimization</div>
+                <div class="achievement-description">Proactively monitored and resolved pipeline failures, maintaining 99.5% uptime</div>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -1150,7 +1296,7 @@
       <div class="col-8 panel card">
         <h3>Educational Background</h3>
         <div class="list">
-          <div class="project-item" style="padding:18px; margin-top:16px">
+          <div class="experience-item" style="padding:18px; margin-top:16px">
             <strong style="color:var(--brand)">Bachelor of Engineering in Computer Engineering</strong>
             <div class="muted">Gujarat Power Engineering & Research Institute (2019–2023)</div>
             <div style="margin-top:8px">
@@ -1442,39 +1588,6 @@
       skillBars.forEach(bar => observer.observe(bar));
     }
 
-    // Smooth scroll polyfill for older browsers
-    if (!('scrollBehavior' in document.documentElement.style)) {
-      const links = document.querySelectorAll('a[href^="#"]');
-      links.forEach(link => {
-        link.addEventListener('click', (e) => {
-          const target = document.querySelector(link.getAttribute('href'));
-          if (target) {
-            e.preventDefault();
-            const start = window.pageYOffset;
-            const end = target.offsetTop - 80;
-            const duration = 800;
-            const startTime = performance.now();
-            
-            function animate(currentTime) {
-              const elapsed = currentTime - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const easeProgress = progress < 0.5 
-                ? 2 * progress * progress 
-                : -1 + (4 - 2 * progress) * progress;
-              
-              window.scrollTo(0, start + (end - start) * easeProgress);
-              
-              if (progress < 1) {
-                requestAnimationFrame(animate);
-              }
-            }
-            
-            requestAnimationFrame(animate);
-          }
-        });
-      });
-    }
-
     // Performance optimization: Debounce scroll events
     function debounce(func, wait) {
       let timeout;
@@ -1506,17 +1619,6 @@
         }
       }
     });
-
-    // Preload critical images (if any were added)
-    function preloadImages() {
-      const images = ['data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'%236ee7ff\'/></svg>'];
-      images.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-    }
-    
-    preloadImages();
   </script>
 </body>
 </html>
