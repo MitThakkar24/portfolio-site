@@ -726,6 +726,214 @@
       font-size: 13px;
     }
     
+    /* ENHANCED CERTIFICATIONS SECTION */
+    .certifications-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .cert-card {
+      background: linear-gradient(135deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .cert-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.3);
+      background: linear-gradient(135deg, rgba(110,231,255,.08), rgba(155,140,255,.06));
+      border-color: rgba(110,231,255,.2);
+    }
+    
+    .cert-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: white;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cert-icon.microsoft {
+      background: linear-gradient(135deg, #00BCF2, #0078D4);
+    }
+    
+    .cert-icon.azure {
+      background: linear-gradient(135deg, #0078D4, #005BA1);
+    }
+    
+    .cert-icon.fabric {
+      background: linear-gradient(135deg, #742774, #BB16A3);
+    }
+    
+    .cert-icon.powerbi {
+      background: linear-gradient(135deg, #F2C811, #FFCC00);
+      color: #333;
+    }
+    
+    .cert-icon.databricks {
+      background: linear-gradient(135deg, #FF6B35, #F7931E);
+    }
+    
+    .cert-icon.general {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    }
+    
+    .cert-content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .cert-title {
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 4px;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    
+    .cert-details {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    .cert-date {
+      background: rgba(74,222,128,.12);
+      color: var(--success);
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+    
+    .cert-date.recent {
+      background: rgba(110,231,255,.12);
+      color: var(--brand);
+    }
+    
+    .strengths-card {
+      background: linear-gradient(135deg, rgba(110,231,255,.03), rgba(155,140,255,.03));
+      border: 1px solid rgba(110,231,255,.2);
+      border-radius: var(--radius);
+      padding: 24px;
+      height: fit-content;
+    }
+    
+    .strengths-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+    }
+    
+    .strengths-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+    
+    .strengths-list li:hover {
+      background: rgba(255,255,255,.02);
+    }
+    
+    .strength-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    
+    @media (max-width: 768px) {
+      .cert-card {
+        padding: 16px;
+        gap: 12px;
+      }
+      
+      .cert-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      
+      .cert-title {
+        font-size: 15px;
+      }
+      
+      .cert-details {
+        font-size: 13px;
+      }
+      
+      .strengths-card {
+        padding: 20px;
+      }
+      
+      .strengths-list li {
+        font-size: 13px;
+        padding: 6px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .cert-card {
+        padding: 14px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+      
+      .cert-content {
+        width: 100%;
+      }
+      
+      .cert-date {
+        align-self: flex-end;
+        margin-top: 8px;
+      }
+    }
+    
     @media (max-width: 768px) {
       .experience-item, .project-item {
         padding: 20px 16px;
@@ -1331,53 +1539,123 @@
       </div>
     </section>
 
+    <!-- ENHANCED CERTIFICATIONS SECTION -->
     <section id="certs" class="grid sections">
-      <div class="col-8 panel card">
-        <h3>Professional Certifications & Achievements</h3>
-        <div class="list">
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>🏆 <strong>Microsoft Azure AI Engineer Associate (AI-102)</strong></span>
-            <span class="cert-badge">Jun 2024</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>📊 <strong>Microsoft Fabric Analytics Engineer Associate (DP-600)</strong></span>
-            <span class="cert-badge">May 2024</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>🤖 <strong>Azure Data Scientist Associate (DP-100)</strong></span>
-            <span class="cert-badge">May 2024</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>⚡ <strong>Power BI Data Analyst Associate (PL-300)</strong></span>
-            <span class="cert-badge">Jul 2023</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>🧠 <strong>Azure AI Fundamentals (AI-900)</strong></span>
-            <span class="cert-badge">Jul 2023</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>📈 <strong>Excel for Intermediate Level</strong></span>
-            <span class="cert-badge">Oct 2023</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>🚀 <strong>Smart India Hackathon 2022</strong></span>
-            <span class="cert-badge">Finalist</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0">
-            <span>🏢 <strong>Databricks Lakehouse Platform Accreditation</strong></span>
-            <span class="cert-badge">Mar 2024</span>
+      <div class="col-8">
+        <div class="panel card">
+          <h3 style="margin-bottom: 24px;">Professional Certifications & Achievements</h3>
+          
+          <div class="certifications-grid">
+            <div class="cert-card">
+              <div class="cert-icon azure">AI</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Azure AI Engineer Associate (AI-102)</h4>
+                <p class="cert-details">Microsoft • Advanced AI solutions and cognitive services implementation</p>
+              </div>
+              <div class="cert-date recent">Jun 2024</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon fabric">DP</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Microsoft Fabric Analytics Engineer Associate (DP-600)</h4>
+                <p class="cert-details">Microsoft • Latest certification in Microsoft's unified data platform</p>
+              </div>
+              <div class="cert-date recent">May 2024</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon azure">DS</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Azure Data Scientist Associate (DP-100)</h4>
+                <p class="cert-details">Microsoft • Machine learning and data science on Azure platform</p>
+              </div>
+              <div class="cert-date recent">May 2024</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon powerbi">PL</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Power BI Data Analyst Associate (PL-300)</h4>
+                <p class="cert-details">Microsoft • Core certification for business intelligence development</p>
+              </div>
+              <div class="cert-date">Jul 2023</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon microsoft">AI</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Azure AI Fundamentals (AI-900)</h4>
+                <p class="cert-details">Microsoft • Foundation knowledge in AI and machine learning concepts</p>
+              </div>
+              <div class="cert-date">Jul 2023</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon microsoft">EX</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Excel for Intermediate Level</h4>
+                <p class="cert-details">Microsoft • Advanced spreadsheet analysis and data manipulation</p>
+              </div>
+              <div class="cert-date">Oct 2023</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon databricks">DB</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Databricks Lakehouse Platform Accreditation</h4>
+                <p class="cert-details">Databricks • Modern data lakehouse architecture and implementation</p>
+              </div>
+              <div class="cert-date">Mar 2024</div>
+            </div>
+
+            <div class="cert-card">
+              <div class="cert-icon general">SIH</div>
+              <div class="cert-content">
+                <h4 class="cert-title">Smart India Hackathon 2022 - Finalist</h4>
+                <p class="cert-details">Government of India • National level competition for innovative solutions</p>
+              </div>
+              <div class="cert-date">2022</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-4 panel card">
-        <h3>Professional Strengths</h3>
-        <ul class="list">
-          <li>🎯 <strong>Client-Centric Approach:</strong> Understanding business needs and translating them into technical solutions</li>
-          <li>🔒 <strong>End-to-End Ownership:</strong> From data ingestion to final insights delivery</li>
-          <li>⚡ <strong>Performance Focus:</strong> Building scalable, reliable, and fast data solutions</li>
-          <li>🤝 <strong>Collaborative Leadership:</strong> Effective communication across technical and business teams</li>
-          <li>📚 <strong>Continuous Learning:</strong> Staying current with emerging technologies and best practices</li>
-        </ul>
+      <div class="col-4">
+        <div class="strengths-card">
+          <h3>Professional Strengths</h3>
+          <ul class="strengths-list">
+            <li>
+              <span class="strength-icon">🎯</span>
+              <div>
+                <strong>Client-Centric Approach:</strong> Understanding business needs and translating them into technical solutions
+              </div>
+            </li>
+            <li>
+              <span class="strength-icon">🔒</span>
+              <div>
+                <strong>End-to-End Ownership:</strong> From data ingestion to final insights delivery
+              </div>
+            </li>
+            <li>
+              <span class="strength-icon">⚡</span>
+              <div>
+                <strong>Performance Focus:</strong> Building scalable, reliable, and fast data solutions
+              </div>
+            </li>
+            <li>
+              <span class="strength-icon">🤝</span>
+              <div>
+                <strong>Collaborative Leadership:</strong> Effective communication across technical and business teams
+              </div>
+            </li>
+            <li>
+              <span class="strength-icon">📚</span>
+              <div>
+                <strong>Continuous Learning:</strong> Staying current with emerging technologies and best practices
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
