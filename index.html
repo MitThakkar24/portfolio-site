@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0a0f14" />
   <style>
-    /* ====== THEME ====== */
+    /* ===== THEME ===== */
     :root{
       --bg:#0a0f14;
       --panel:#0e141b;
       --text:#e8eef5;
-      --muted:#a7b3c2;
+      --muted:#a9b3c2;
       --border:rgba(255,255,255,.08);
       --brand:#6ee7ff;
       --brand-2:#9b8cff;
@@ -37,7 +37,8 @@
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
-    /* ====== HEADER (fixed) ====== */
+
+    /* ===== HEADER (fixed) ===== */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(140%) blur(10px);
@@ -47,6 +48,7 @@
     .topbar{
       display:grid; grid-template-columns:220px 1fr 220px; gap:14px; align-items:center;
     }
+
     /* brand */
     .brand{display:flex; align-items:center; gap:12px; font-weight:700}
     .brand .dot{
@@ -54,36 +56,45 @@
       background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2));
       box-shadow:0 0 18px rgba(110,231,255,.35);
     }
+
     /* segmented nav */
     .navwrap{
-      justify-self:center; width:100%; max-width:680px;
-      display:flex; align-items:center; padding:6px; gap:6px;
+      justify-self:center; width:100%; max-width:760px;
+      display:flex; align-items:center; padding:6px;
       border-radius:999px; border:1px solid var(--border);
       background:rgba(255,255,255,.02);
       position:relative;
     }
     .nav{
-      display:flex; align-items:center; gap:6px; width:100%;
-      position:relative;
+      position:relative; display:flex; align-items:center; gap:6px; width:100%;
     }
     .nav a{
-      flex:1 1 auto; text-align:center; padding:10px 12px; color:var(--muted);
-      border-radius:999px; position:relative; transition:color .2s ease;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex:1 1 auto; min-width:90px;
+      text-align:center; padding:10px 12px; color:var(--muted);
+      border-radius:999px; position:relative; transition:color .18s ease;
+      white-space:nowrap;
     }
     .nav a:hover{color:#dbe7ff}
     .nav a.is-active{color:var(--text)}
+
+    /* The slider uses absolute left+width for subpixel-stable positioning */
     .nav .slider{
-      position:absolute; top:6px; bottom:6px; width:90px;
-      border-radius:999px; background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
-      border:1px solid var(--border);
+      position:absolute; top:0; left:0; height:100%;
+      background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
+      border:1px solid var(--border); border-radius:999px;
       box-shadow:0 10px 30px rgba(110,231,255,.08);
-      transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s;
       pointer-events:none;
+      will-change:transform, width;
+      transform:translate3d(0,0,0);
+      transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s cubic-bezier(.2,.7,.2,1);
     }
-    /* badge / ctas */
-    .right{
-      justify-self:end; display:flex; gap:10px; align-items:center;
+    @media (prefers-reduced-motion: reduce){
+      .nav .slider{transition:none}
     }
+
+    /* right side */
+    .right{justify-self:end; display:flex; gap:10px; align-items:center;}
     .badge{
       display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
       border:1px solid var(--border); border-radius:999px; color:#cfe7ff;
@@ -101,17 +112,17 @@
       .navwrap{display:none}
       .ham{display:inline-flex; padding:10px 12px; border:1px solid var(--border); border-radius:12px}
     }
+
     /* mobile drawer */
-    .drawer{
-      display:none; padding:10px; margin-top:10px
-    }
+    .drawer{display:none; padding:10px; margin-top:10px}
     .drawer.open{display:block}
     .drawer a{
       display:block; padding:12px 14px; border:1px solid var(--border); border-radius:12px;
       color:var(--muted); margin-bottom:8px; background:rgba(255,255,255,.02)
     }
     .drawer a.is-active{color:var(--text); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
-    /* ====== HERO ====== */
+
+    /* ===== CONTENT ===== */
     .hero{
       display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:36px 0 8px;
     }
@@ -121,35 +132,30 @@
     .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
     .chip{border:1px solid var(--border); padding:8px 12px; border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)}
 
-    /* ====== LAYOUT ====== */
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px}
     .col-8{grid-column:span 8} .col-4{grid-column:span 4}
     @media (max-width: 980px){ .col-8,.col-4{grid-column:1/-1} }
     .card{padding:18px} .muted{color:var(--muted)}
     .divider{height:1px; background:var(--border); margin:12px 0}
     .list{display:grid; gap:10px}
-
-    /* ====== UTIL ====== */
     .sections{scroll-margin-top:88px}
     footer{padding:30px 0; color:var(--muted); text-align:center}
   </style>
 </head>
 <body>
-  <!-- ====== HEADER ====== -->
+  <!-- ===== HEADER ===== -->
   <header>
     <div class="container">
       <div class="topbar">
         <div class="brand">
           <span class="dot" aria-hidden="true"></span>
-          <div>
-            <div>Mit Thakkar</div>
-          </div>
+          <div>Mit Thakkar</div>
         </div>
 
         <!-- centered segmented nav -->
         <div class="navwrap" aria-label="Primary">
           <div class="nav" id="nav">
-            <span class="slider" id="slider" style="transform:translateX(0)"></span>
+            <span class="slider" id="slider" style="width:0"></span>
             <a href="#about" class="is-active">About</a>
             <a href="#skills">Skills</a>
             <a href="#experience">Experience</a>
@@ -162,9 +168,7 @@
 
         <!-- right side -->
         <div class="right">
-          <span class="badge" title="Currently looking">
-            ✓ Open to Opportunities
-          </span>
+          <span class="badge" title="Currently looking">✓ Open to Opportunities</span>
           <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer">Menu</button>
         </div>
       </div>
@@ -182,7 +186,7 @@
     </div>
   </header>
 
-  <!-- ====== MAIN ====== -->
+  <!-- ===== MAIN ===== -->
   <main class="container">
     <!-- HERO -->
     <section id="about" class="hero sections">
@@ -251,7 +255,7 @@
             <ul class="list" style="margin-top:8px">
               <li>Designed ADF pipelines with incremental refresh.</li>
               <li>Built Databricks pipelines → Azure SQL → Power BI.</li>
-              <li>Power BI dashboards with YOY/MOM KPIs and RLS.</li>
+              <li>Power BI dashboards with YOY/MON KPIs and RLS.</li>
               <li>Monitored & resolved pipeline failures proactively.</li>
             </ul>
           </div>
@@ -273,7 +277,7 @@
         <div class="panel" style="padding:14px">
           <strong>Sales Dashboard</strong> — Power BI • Azure SQL • ADF • Blob
           <ul class="list" style="margin-top:8px">
-            <li>Modeled data & built CY/PY KPIs, YOY/MOM, top customers/products.</li>
+            <li>Modeled data & built CY/PY KPIs, YOY/MON, top customers/products.</li>
             <li>Implemented RLS and deployed to Service.</li>
           </ul>
         </div>
@@ -368,53 +372,70 @@
       a.addEventListener('click', ()=>drawer.classList.remove('open'));
     });
 
-    // Segmented nav slider (desktop)
+    // ----- Robust segmented nav slider -----
     const nav = document.getElementById('nav');
     const slider = document.getElementById('slider');
     const links = [...nav.querySelectorAll('a')];
 
-    function syncSlider(target){
-      const rect = target.getBoundingClientRect();
-      const parent = nav.getBoundingClientRect();
-      const w = Math.max(86, rect.width);              // consistent width
-      const x = rect.left - parent.left;
-      slider.style.width = w + 'px';
-      slider.style.transform = `translateX(${x}px)`;
-      links.forEach(l=>l.classList.toggle('is-active', l === target));
-      // mirror state to mobile drawer
-      drawer.querySelectorAll('a').forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === target.getAttribute('href')));
+    function setSliderTo(el){
+      if(!el) return;
+      // Use offsetLeft/offsetWidth to avoid rect rounding jitter at different zoom/DPI
+      const left = el.offsetLeft;
+      const width = el.offsetWidth;
+      // Translate relative to the nav container (not viewport); stable at any zoom
+      slider.style.width = width + 'px';
+      slider.style.transform = `translate3d(${left}px,0,0)`;
+      links.forEach(l => l.classList.toggle('is-active', l === el));
+      // mirror state to mobile
+      drawer.querySelectorAll('a').forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === el.getAttribute('href')));
     }
 
-    // initialize slider at first active link
-    const initial = nav.querySelector('.is-active') || links[0];
-    syncSlider(initial);
-
-    // click + intersection observer to update active state
+    // Smooth scroll on click + update
     links.forEach(a=>{
-      a.addEventListener('click', e=>{
-        // smooth scroll
+      a.addEventListener('click', (e)=>{
         const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if(el){
+        const section = document.querySelector(id);
+        if(section){
           e.preventDefault();
-          el.scrollIntoView({behavior:'smooth'});
+          section.scrollIntoView({behavior:'smooth'});
         }
-        syncSlider(a);
+        setSliderTo(a);
       });
     });
 
-    // Keep active state while scrolling
+    // IntersectionObserver to follow scroll
     const sections = [...document.querySelectorAll('.sections')];
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
           const id = '#' + e.target.id;
           const match = links.find(l=>l.getAttribute('href')===id);
-          if(match) syncSlider(match);
+          if(match) setSliderTo(match);
         }
       });
     },{rootMargin:'-55% 0px -40% 0px', threshold:.01});
     sections.forEach(s=>io.observe(s));
+
+    // Resize observers: window + element to survive zoom/OS text scaling, font loads, layout shifts
+    const debounced = (fn, ms=50)=>{
+      let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); };
+    };
+    const recalc = debounced(()=> setSliderTo(nav.querySelector('.is-active') || links[0]), 16);
+
+    // Window resize (also fires on zoom in most browsers)
+    window.addEventListener('resize', recalc, {passive:true});
+
+    // Element resize (container width changes)
+    const ro = new ResizeObserver(recalc);
+    ro.observe(nav);
+
+    // Recalc after fonts load to account for width changes
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(recalc);
+    }
+
+    // Initialize once layout is ready
+    requestAnimationFrame(()=> setSliderTo(nav.querySelector('.is-active') || links[0]));
   </script>
 </body>
 </html>
