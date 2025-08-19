@@ -16,7 +16,7 @@
       --brand-2:#9b8cff;
       --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
-      --header:96px; /* JS updates live */
+      --header:96px; /* updated live by JS */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -70,12 +70,12 @@
     /* ===== CONTENT ===== */
     .hero{
       display:grid;
-      grid-template-columns:minmax(520px, 1.15fr) 0.85fr; /* narrower right card to reduce visual void */
-      gap:20px;                        /* tighter than before */
+      grid-template-columns:minmax(520px, 1.15fr) 0.85fr;
+      gap:20px;
       align-items:start;
-      padding:36px 0 2px;              /* slightly smaller bottom padding */
+      padding:36px 0 2px;
     }
-    .hero > aside{ align-self:start; max-width:520px } /* cap card width so it doesn’t feel “loose” */
+    .hero > aside{ align-self:start; max-width:560px }
     @media (max-width:980px){ .hero{grid-template-columns:1fr; padding:28px 0} .hero>aside{max-width:none} }
 
     h1{font-size:clamp(32px, 3.6vw, 52px); line-height:1.06; margin:6px 0 8px}
@@ -88,20 +88,49 @@
     @media (max-width:980px){ .col-8,.col-4{grid-column:1/-1} }
     .card{padding:18px} .muted{color:var(--muted)}
     .divider{height:1px; background:var(--border); margin:10px 0}
-
-    /* Compact Quick Facts spacing */
-    .facts h3{margin:0 0 4px}
-    .facts .tag{color:var(--muted); font-size:14.5px}
-    .facts .divider{margin:8px 0}
-    .facts .list a{line-height:1.45}
-
     .list{display:grid; gap:9px}
     .sections{scroll-margin-top:calc(var(--header) + 4px)}
     footer{padding:30px 0; color:var(--muted); text-align:center}
     .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
     .btn svg{width:16px; height:16px; flex:0 0 16px}
 
-    /* ===== CTA (kept from last version) ===== */
+    /* ===== Quick Facts (new look) ===== */
+    .facts h3{margin:0 0 8px}
+    .pills{display:flex; flex-wrap:wrap; gap:8px; margin:2px 0 6px}
+    .pill{
+      padding:6px 10px; border-radius:999px; border:1px solid var(--border);
+      background:rgba(255,255,255,.02); color:#cfe7ff; font-size:13.5px;
+    }
+    .pill.ok{background:linear-gradient(135deg, rgba(110,231,255,.16), rgba(155,140,255,.14)); color:#e9f9ff}
+
+    .kv{display:grid; grid-template-columns:96px 1fr; align-items:center; gap:6px}
+    .kv .k{color:var(--muted); font-size:14px}
+    .kv .v{display:inline-flex; align-items:center; gap:10px; flex-wrap:wrap}
+    .fact-link{border-bottom:1px dashed rgba(255,255,255,.18)}
+    .copy{
+      position:relative; display:inline-flex; align-items:center; justify-content:center;
+      width:28px; height:28px; border-radius:8px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03); cursor:pointer;
+    }
+    .copy svg{width:14px; height:14px}
+    .copy.copied::after{
+      content:"Copied!"; position:absolute; top:-28px;
+      background:#0c131a; border:1px solid var(--border); border-radius:8px; padding:3px 6px;
+      font-size:12px; color:#dff7ff; white-space:nowrap;
+      box-shadow:var(--shadow);
+    }
+    @media (prefers-reduced-motion: reduce){ .copy.copied::after{transition:none} }
+
+    .socials{display:flex; gap:10px; flex-wrap:wrap}
+    .iconlink{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:10px; border:1px solid var(--border);
+      background:rgba(255,255,255,.02)
+    }
+    .iconlink svg{width:16px; height:16px}
+
+    /* ===== CTA ===== */
     .cta{position:relative; grid-column:1/-1; padding:22px 24px; display:grid; grid-template-columns:minmax(420px, 1fr) auto; align-items:center; gap:24px; margin-top:26px; overflow:hidden}
     .cta::after{content:""; position:absolute; right:-140px; top:-140px; width:420px; height:420px; background:radial-gradient(circle at 50% 50%, rgba(110,231,255,.14), rgba(155,140,255,.12) 40%, transparent 60%); filter:blur(6px); pointer-events:none}
     .cta h3{margin:0 0 6px}
@@ -112,6 +141,7 @@
   </style>
 </head>
 <body>
+  <!-- ===== HEADER ===== -->
   <header id="hdr">
     <div class="container">
       <div class="topbar">
@@ -147,6 +177,7 @@
     </div>
   </header>
 
+  <!-- ===== MAIN ===== -->
   <main class="container">
     <!-- HERO -->
     <section id="about" class="hero sections">
@@ -166,16 +197,51 @@
         </div>
       </div>
 
-      <!-- Tight Quick Facts box -->
+      <!-- NEW Quick Facts -->
       <aside class="panel card facts">
-        <h3 style="margin:0 0 4px">Quick Facts</h3>
-        <div class="tag">2+ yrs experience • 8+ domains • End-to-End lifecycle</div>
+        <h3>Quick Facts</h3>
+
+        <div class="pills">
+          <span class="pill">2+ yrs</span>
+          <span class="pill">8+ domains</span>
+          <span class="pill">End-to-End</span>
+          <span class="pill ok">Open to Opportunities</span>
+        </div>
+
         <div class="divider"></div>
-        <div class="list">
-          <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
-          <a href="tel:+917575084084">+91-7575084084</a>
-          <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
+
+        <div class="kv">
+          <span class="k">Email</span>
+          <span class="v">
+            <a class="fact-link" href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
+            <button class="copy" data-copy="mitthakkar244@gmail.com" title="Copy email" aria-label="Copy email">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/><rect x="4" y="4" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </span>
+        </div>
+
+        <div class="kv">
+          <span class="k">Phone</span>
+          <span class="v">
+            <a class="fact-link" href="tel:+917575084084">+91-7575084084</a>
+            <button class="copy" data-copy="+917575084084" title="Copy phone" aria-label="Copy phone">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 6.2 2 2 0 0 1 4 4h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L7.1 11a16 16 0 0 0 6 6l.6-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </span>
+        </div>
+
+        <div class="kv">
+          <span class="k">Profiles</span>
+          <span class="v socials">
+            <a class="iconlink" href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9h3v9H6zM7.5 6.5A1.5 1.5 0 1 0 7.5 3a1.5 1.5 0 0 0 0 3.5zM11 9h3v1.4c.6-1 1.7-1.6 2.9-1.6 2 0 3.6 1.3 3.6 4.2V18h-3v-3.6c0-1.2-.4-2-1.5-2s-1.8.8-1.8 2V18h-3z" fill="currentColor"/></svg>
+              LinkedIn
+            </a>
+            <a class="iconlink" href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.9.6-3.5-1.2-3.5-1.2-.5-1.1-1.2-1.4-1.2-1.4-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7-1.1 1.9-1.5-2.3-.3-4.8-1.1-4.8-5 0-1.1.4-2 1-2.8-.1-.2-.4-1.2.1-2.5 0 0 .9-.3 2.9 1 .8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-1.3 2.9-1 2.9-1 .6 1.3.2 2.3.1 2.5.7.8 1 1.7 1 2.8 0 3.9-2.5 4.7-4.8 5 .4.3.8 1 .8 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+              GitHub
+            </a>
+          </span>
         </div>
       </aside>
     </section>
@@ -297,7 +363,7 @@
       </div>
     </section>
 
-    <!-- CONTACT (FULL-WIDTH CTA, one-line actions on desktop) -->
+    <!-- CONTACT (FULL-WIDTH CTA) -->
     <section id="contact" class="sections">
       <div class="panel cta">
         <div class="lead">
@@ -348,7 +414,7 @@
     const setHeaderVar = ()=> document.documentElement.style.setProperty('--header', `${Math.round(hdr.getBoundingClientRect().height)}px`);
     setHeaderVar(); new ResizeObserver(setHeaderVar).observe(hdr); window.addEventListener('resize', setHeaderVar, {passive:true});
 
-    // Robust segmented nav slider
+    // Segmented nav slider
     const nav = document.getElementById('nav');
     const slider = document.getElementById('slider');
     const links = [...nav.querySelectorAll('a')];
@@ -390,6 +456,20 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(recalc);
 
     requestAnimationFrame(()=> setSliderTo(aboutLink || links[0]));
+
+    // Copy to clipboard (Quick Facts)
+    document.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(btn.dataset.copy);
+          btn.classList.add('copied');
+          setTimeout(()=>btn.classList.remove('copied'), 1200);
+        }catch(e){
+          // fallback: select text via prompt
+          window.prompt('Copy to clipboard:', btn.dataset.copy);
+        }
+      });
+    });
   </script>
 </body>
 </html>
