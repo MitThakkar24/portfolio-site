@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mit Thakkar — Data Analyst & BI Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0f14" />
+  <meta name="description" content="Portfolio of Mit Thakkar — Data Analyst & BI Developer specializing in Power BI, Azure, SQL, and scalable data engineering." />
+  <meta property="og:title" content="Mit Thakkar — Data Analyst & BI Developer" />
+  <meta property="og:description" content="Power BI • Azure • SQL • Data Engineering • Microsoft Fabric" />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1620;
+      --muted:#a9b1bd;
+      --text:#e6edf3;
+      --brand:#6ee7ff;
+      --brand-2:#9b8cff;
+      --border:rgba(255,255,255,.08);
+      --glow:0 0 30px rgba(110,231,255,.15);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --code:#0b1220;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+      color:var(--text); background:radial-gradient(1200px 600px at 80% -10%, rgba(110,231,255,.06), transparent 50%),
+                          radial-gradient(900px 500px at -10% 10%, rgba(155,140,255,.06), transparent 50%),
+                          var(--bg);
+      letter-spacing:.2px;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:1120px; margin:0 auto; padding:28px 20px}
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(to bottom, rgba(11,15,20,.85), rgba(11,15,20,.65));
+      border-bottom:1px solid var(--border);
+    }
+    .nav{display:flex; align-items:center; gap:20px; justify-content:space-between}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700}
+    .brand .dot{
+      width:12px; height:12px; border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2));
+      box-shadow:var(--glow);
+    }
+    .links{display:flex; gap:14px; flex-wrap:wrap}
+    .links a{
+      padding:8px 12px; border:1px solid var(--border); border-radius:12px; color:var(--muted)
+    }
+    .links a.active{color:var(--text); border-color:transparent; background:linear-gradient(135deg, rgba(110,231,255,.12), rgba(155,140,255,.12)); box-shadow:var(--glow)}
+    .hero{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:48px 0 10px;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding:28px 0} }
+    h1{font-size:clamp(28px, 3.5vw, 46px); line-height:1.15; margin:8px 0 12px}
+    .subtitle{color:var(--muted); font-size:clamp(15px, 1.8vw, 18px)}
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 0}
+    .chip{
+      border:1px solid var(--border); padding:8px 12px; border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)
+    }
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)
+    }
+    .grid{
+      display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px
+    }
+    .col-8{grid-column:span 8} .col-4{grid-column:span 4}
+    @media (max-width: 900px){ .col-8,.col-4{grid-column:1/-1} }
+    .card{padding:18px}
+    .card h3{margin:0 0 6px; font-size:18px}
+    .muted{color:var(--muted)}
+    .divider{height:1px; background:var(--border); margin:12px 0}
+    .list{display:grid; gap:12px}
+    .tag{display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:10px; margin:6px 6px 0 0; color:#cbd5e1}
+    .kpi{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px}
+    .kpi .k{padding:14px; border:1px dashed var(--border); border-radius:14px; text-align:center}
+    .k .v{font-weight:700; font-size:18px}
+    footer{padding:32px 0; color:var(--muted); text-align:center}
+    .contact{
+      display:grid; gap:10px; margin-top:10px
+    }
+    .contact a{display:flex; align-items:center; gap:10px}
+    .bullet{width:6px; height:6px; border-radius:50%; background:var(--brand)}
+    .timeline{display:grid; gap:14px}
+    .item{padding:14px; border:1px solid var(--border); border-radius:14px}
+    .item h4{margin:2px 0 4px}
+    .domain{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+    .shine{
+      position:relative; overflow:hidden
+    }
+    .shine::after{
+      content:""; position:absolute; inset:-100% -50% auto; height:200%;
+      background:linear-gradient(120deg, transparent, rgba(255,255,255,.06), transparent);
+      transform:rotate(8deg)
+    }
+    .shine:hover::after{animation:shine 1.8s forwards}
+    @keyframes shine{to{transform:translateX(120%) rotate(8deg)}}
+    .code{
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background:var(--code); padding:12px; border:1px solid var(--border); border-radius:10px; color:#cbd5e1
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
+      border:1px solid var(--border); background:rgba(255,255,255,.02)
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--border);
+      background:linear-gradient(135deg, rgba(110,231,255,.12), rgba(155,140,255,.12)); color:var(--text);
+      box-shadow:var(--glow); cursor:pointer
+    }
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+    .sections{scroll-margin-top:88px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Mit Thakkar</span>
+        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13l4 4L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Open to Opportunities</span>
+      </div>
+      <nav class="links">
+        <a href="#about" class="active">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certs">Certifications</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section id="about" class="hero sections">
+      <div>
+        <h1>Data Analyst & BI Developer</h1>
+        <p class="subtitle">
+          Result-driven professional with 2+ years building insightful dashboards, scalable ETL pipelines, and robust data models across healthcare, logistics, education, and more. Strong in Power BI, Azure, SQL, Python, and Microsoft Fabric.
+        </p>
+        <div class="chips">
+          <span class="chip">Power BI & DAX</span>
+          <span class="chip">Azure (ADF, Synapse)</span>
+          <span class="chip">Microsoft Fabric</span>
+          <span class="chip">SQL & Databricks</span>
+          <span class="chip">Python</span>
+          <span class="chip">RLS • YOY/MOM KPIs</span>
+        </div>
+        <div style="margin-top:20px; display:flex; gap:12px; flex-wrap:wrap">
+          <button class="btn shine" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Hire Me
+          </button>
+          <a class="links active" href="#projects" style="padding:12px 16px; border-radius:12px">See Projects</a>
+        </div>
+      </div>
+
+      <aside class="panel card">
+        <h3>Quick Facts</h3>
+        <div class="kpi">
+          <div class="k"><div class="v">2+ yrs</div><div class="muted">Experience</div></div>
+          <div class="k"><div class="v">8+</div><div class="muted">Domains</div></div>
+          <div class="k"><div class="v">End-to-End</div><div class="muted">Data Lifecycle</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="contact">
+          <a href="mailto:mitthakkar244@gmail.com" aria-label="Email"><span class="bullet"></span> mitthakkar244@gmail.com</a>
+          <a href="tel:+917575084084" aria-label="Phone"><span class="bullet"></span> +91-7575084084</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><span class="bullet"></span> LinkedIn</a>
+          <a href="https://github.com/" target="_blank" rel="noreferrer"><span class="bullet"></span> GitHub</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Skill Set</h3>
+        <div class="list">
+          <div>
+            <strong>Primary:</strong>
+            <span class="tag">SQL (DDL/DML)</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">DAX</span>
+            <span class="tag">Azure Synapse</span>
+            <span class="tag">Microsoft Fabric</span>
+            <span class="tag">ADF Pipelines</span>
+            <span class="tag">Python (Pandas, NumPy, scikit-learn, TensorFlow)</span>
+            <span class="tag">Excel (Pivot, Charts)</span>
+          </div>
+          <div>
+            <strong>Secondary:</strong>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Deep Learning</span>
+            <span class="tag">EDA</span>
+            <span class="tag">Statistics</span>
+            <span class="tag">Data Science & AI</span>
+          </div>
+          <div>
+            <strong>Databases & Tools:</strong>
+            <span class="tag">Databricks</span>
+            <span class="tag">Anaconda</span>
+            <span class="tag">SSMS</span>
+            <span class="tag">Azure SQL</span>
+            <span class="tag">Cosmos DB (Basic)</span>
+            <span class="tag">Snowflake (Basic)</span>
+            <span class="tag">SharePoint</span>
+            <span class="tag">Azure Blob</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 panel card">
+        <h3>What I Love Building</h3>
+        <ul class="list">
+          <li>Insightful, secure <strong>Power BI</strong> dashboards with RLS</li>
+          <li>Reliable <strong>ADF</strong> pipelines & incremental refresh</li>
+          <li><strong>Databricks</strong> notebooks consuming complex APIs</li>
+          <li>Clean semantic models with robust <strong>DAX</strong> KPIs (YOY/MOM)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Experience</h3>
+        <div class="timeline">
+          <div class="item">
+            <h4>Data Analyst • Data Engineer • Data Scientist — <span class="muted">atQor</span></h4>
+            <div class="muted">Feb 2023 — Present • Healthcare, Sales, Transportation, Help Desk, Education, Logistics, Project Management</div>
+            <ul class="list" style="margin-top:8px">
+              <li>Primary data point-of-contact with clients; convert business needs into technical solutions.</li>
+              <li>Designed & orchestrated <strong>ADF</strong> pipelines with <strong>incremental refresh</strong> for scalable ingestion.</li>
+              <li>Built <strong>Databricks</strong> pipelines to extract/transform <strong>REST API</strong> data → Azure SQL → Power BI.</li>
+              <li>Developed & maintained <strong>Power BI</strong> dashboards with complex KPIs (YOY/MOM) and <strong>RLS</strong>.</li>
+              <li>Optimized Python transformations for high-volume processing; led data migration while ensuring integrity.</li>
+              <li>Proactive monitoring & resolution of pipeline failures to maximize reliability and uptime.</li>
+            </ul>
+            <div class="domain">
+              <span class="tag">Client Communication</span>
+              <span class="tag">End-to-End Ownership</span>
+              <span class="tag">Data Quality</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 panel card">
+        <h3>Highlights</h3>
+        <div class="list">
+          <div class="code">Sources: SharePoint • Azure SQL • Blob • REST APIs • Excel</div>
+          <div class="code">Strengths: Modeling • KPIs • RLS • Incremental/Historical Loads</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Projects</h3>
+        <div class="item">
+          <h4>Sales Dashboard</h4>
+          <div class="muted">Power BI • Azure SQL • ADF • Azure Blob</div>
+          <ul class="list">
+            <li>Moved flat-file data to SQL, designed model & relationships, and built reports.</li>
+            <li>KPIs: CY vs PY sales, YOY/MOM growth, Top customers/products, etc.</li>
+            <li>Implemented <strong>RLS</strong> and deployed to Power BI Service.</li>
+          </ul>
+        </div>
+        <div class="divider"></div>
+        <div class="item">
+          <h4>Bank Data Analysis</h4>
+          <div class="muted">Power BI • Azure SQL • ADF • Blob</div>
+          <ul class="list">
+            <li>ADF transformations with <strong>incremental load</strong> policy.</li>
+            <li>Built revenue analytics by loan/deposit, LDR ratio, YOY/MOM trends, client-level insights.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 panel card">
+        <h3>Toolbox Snapshot</h3>
+        <div class="list">
+          <div><strong>Visualization:</strong> Power BI, DAX</div>
+          <div><strong>Engineering:</strong> ADF, Databricks, Azure SQL</div>
+          <div><strong>Languages:</strong> SQL, Python</div>
+          <div><strong>Platforms:</strong> Microsoft Fabric, Synapse</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Achievements & Certifications</h3>
+        <ul class="list">
+          <li>Microsoft Certified: <strong>Azure AI Engineer Associate (AI-102)</strong> — Jun 2024</li>
+          <li>Microsoft Certified: <strong>Fabric Analytics Engineer Associate (DP-600)</strong> — May 2024</li>
+          <li>Microsoft Certified: <strong>Azure Data Scientist Associate (DP-100)</strong> — May 2024</li>
+          <li>Microsoft Certified: <strong>Power BI Data Analyst (PL-300)</strong> — Jul 2023</li>
+          <li>Microsoft Certified: <strong>Azure AI Fundamentals (AI-900)</strong> — Jul 2023</li>
+          <li>Great Learning: <strong>Excel for Intermediate Level</strong> — Oct 2023</li>
+          <li><strong>Smart India Hackathon 2022</strong> — Finalist (Aug 2022)</li>
+          <li>IBM: <strong>Python Basics for Data Science</strong> — Oct 2022</li>
+          <li>Databricks <strong>Lakehouse Platform Accreditation</strong> — Mar 2024</li>
+        </ul>
+      </div>
+      <div class="col-4 panel card">
+        <h3>Focus Areas</h3>
+        <div class="list">
+          <div class="code">KPI Design • Data Modeling • Governance (RLS)</div>
+          <div class="code">Pipelines • API Ingestion • Reliability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Education</h3>
+        <ul class="list">
+          <li><strong>B.E. Computer Engineering</strong> — Gujarat Power Engineering & Research Institute • CGPA 8.45/10 (2019–2023)</li>
+          <li><strong>HSC</strong> — Krishna School of Science, Patan (GSEB) • 60% (2019)</li>
+          <li><strong>SSC</strong> — Krishna School of Science, Patan (GSEB) • 78% (2017)</li>
+        </ul>
+      </div>
+      <div class="col-4 panel card">
+        <h3>Strengths</h3>
+        <ul class="list">
+          <li>Client-first mindset & clear communication</li>
+          <li>Ownership from ingestion → insights</li>
+          <li>Quality, reliability, and scalability</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="grid sections">
+      <div class="col-8 panel card">
+        <h3>Let’s Work Together</h3>
+        <p class="muted">Have a role or project in mind? I’d love to help you turn data into decisions.</p>
+        <div class="contact" style="margin-top:14px">
+          <a href="mailto:mitthakkar244@gmail.com" class="shine pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+            Email: mitthakkar244@gmail.com
+          </a>
+          <a href="tel:+917575084084" class="pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v2a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.06 6.18 2 2 0 0 1 4 4h2a2 2 0 0 1 2 1.72c.12.89.32 1.76.61 2.6a2 2 0 0 1-.45 2.11L7.09 11a16 16 0 0 0 6 6l.57-1.12a2 2 0 0 1 2.11-.45c.84.29 1.71.49 2.6.61A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/></svg>
+            Phone: +91-7575084084
+          </a>
+        </div>
+      </div>
+      <div class="col-4 panel card">
+        <h3>Availability</h3>
+        <p class="muted">Remote or On-site • Full-time</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">&copy; <span id="y"></span> Mit Thakkar • Built with vanilla HTML/CSS/JS</div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth active link state
+    const sections = [...document.querySelectorAll('.sections')];
+    const navLinks = [...document.querySelectorAll('.links a')];
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const id = e.target.id;
+          navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+        }
+      });
+    },{rootMargin:'-50% 0px -40% 0px', threshold:.01});
+    sections.forEach(s=>io.observe(s));
+
+    // Keyboard nav
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key.toLowerCase() === 'g' && (ev.ctrlKey || ev.metaKey)){
+        ev.preventDefault();
+        document.querySelector('.brand').scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+
+  <!-- Source: :contentReference[oaicite:0]{index=0} -->
+</body>
+</html>
