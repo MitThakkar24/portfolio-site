@@ -16,7 +16,7 @@
       --brand-2:#9b8cff;
       --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
-      --header:96px; /* updated live by JS */
+      --header:96px; /* JS updates live */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -50,7 +50,6 @@
     .brand{display:flex; align-items:center; gap:12px; font-weight:700}
     .brand .dot{width:10px; height:10px; border-radius:999px; background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2)); box-shadow:0 0 18px rgba(110,231,255,.35)}
 
-    /* segmented nav (center) */
     .navwrap{justify-self:center; width:100%; max-width:760px; display:flex; padding:6px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.02); position:relative}
     .nav{position:relative; display:flex; align-items:center; gap:6px; width:100%}
     .nav a{display:inline-flex; align-items:center; justify-content:center; flex:1 1 auto; min-width:90px; padding:10px 12px; color:var(--muted); border-radius:999px; white-space:nowrap; transition:color .18s ease}
@@ -70,59 +69,46 @@
 
     /* ===== CONTENT ===== */
     .hero{
-      display:grid; grid-template-columns:1.1fr .9fr; gap:28px;
+      display:grid;
+      grid-template-columns:minmax(520px, 1.15fr) 0.85fr; /* narrower right card to reduce visual void */
+      gap:20px;                        /* tighter than before */
       align-items:start;
-      padding:40px 0 8px;
+      padding:36px 0 2px;              /* slightly smaller bottom padding */
     }
-    .hero > aside{ align-self:start }
-    @media (max-width:980px){ .hero{grid-template-columns:1fr; padding:28px 0} }
-    h1{font-size:clamp(32px, 3.6vw, 52px); line-height:1.1; margin:6px 0 12px}
-    .subtitle{color:var(--muted); font-size:clamp(15px, 1.7vw, 18px)}
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .hero > aside{ align-self:start; max-width:520px } /* cap card width so it doesn’t feel “loose” */
+    @media (max-width:980px){ .hero{grid-template-columns:1fr; padding:28px 0} .hero>aside{max-width:none} }
+
+    h1{font-size:clamp(32px, 3.6vw, 52px); line-height:1.06; margin:6px 0 8px}
+    .subtitle{color:var(--muted); font-size:clamp(15px, 1.7vw, 18px); max-width:760px; margin-bottom:10px}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin:8px 0 10px}
     .chip{border:1px solid var(--border); padding:8px 12px; border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)}
 
-    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:24px}
     .col-8{grid-column:span 8} .col-4{grid-column:span 4}
     @media (max-width:980px){ .col-8,.col-4{grid-column:1/-1} }
     .card{padding:18px} .muted{color:var(--muted)}
-    .divider{height:1px; background:var(--border); margin:12px 0}
-    .list{display:grid; gap:10px}
+    .divider{height:1px; background:var(--border); margin:10px 0}
+
+    /* Compact Quick Facts spacing */
+    .facts h3{margin:0 0 4px}
+    .facts .tag{color:var(--muted); font-size:14.5px}
+    .facts .divider{margin:8px 0}
+    .facts .list a{line-height:1.45}
+
+    .list{display:grid; gap:9px}
     .sections{scroll-margin-top:calc(var(--header) + 4px)}
     footer{padding:30px 0; color:var(--muted); text-align:center}
     .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
     .btn svg{width:16px; height:16px; flex:0 0 16px}
 
-    /* ===== CTA (FULL-WIDTH) ===== */
-    .cta{
-      position:relative;
-      grid-column:1/-1;
-      padding:22px 24px;
-      display:grid;
-      grid-template-columns:minmax(420px, 1fr) auto; /* text left with max width; actions auto */
-      align-items:center;
-      gap:24px;
-      margin-top:26px;
-      overflow:hidden;
-    }
-    .cta::after{
-      content:""; position:absolute; right:-140px; top:-140px; width:420px; height:420px;
-      background:radial-gradient(circle at 50% 50%, rgba(110,231,255,.14), rgba(155,140,255,.12) 40%, transparent 60%);
-      filter:blur(6px); pointer-events:none;
-    }
+    /* ===== CTA (kept from last version) ===== */
+    .cta{position:relative; grid-column:1/-1; padding:22px 24px; display:grid; grid-template-columns:minmax(420px, 1fr) auto; align-items:center; gap:24px; margin-top:26px; overflow:hidden}
+    .cta::after{content:""; position:absolute; right:-140px; top:-140px; width:420px; height:420px; background:radial-gradient(circle at 50% 50%, rgba(110,231,255,.14), rgba(155,140,255,.12) 40%, transparent 60%); filter:blur(6px); pointer-events:none}
     .cta h3{margin:0 0 6px}
     .cta p{margin:0; color:var(--muted); max-width:640px}
-    .actions{
-      display:flex; align-items:center; gap:10px;
-      flex-wrap:nowrap;                 /* keep one line on desktop */
-      white-space:nowrap;
-      overflow:hidden;                  /* no wrap; trims if extremely tight */
-    }
-    /* Slightly denser buttons so all four fit on common laptop widths */
+    .actions{display:flex; align-items:center; gap:10px; flex-wrap:nowrap; white-space:nowrap; overflow:hidden}
     .actions .btn{padding:9px 12px}
-    @media (max-width:900px){
-      .cta{grid-template-columns:1fr; align-items:flex-start}
-      .actions{flex-wrap:wrap; margin-top:8px}
-    }
+    @media (max-width:900px){ .cta{grid-template-columns:1fr; align-items:flex-start} .actions{flex-wrap:wrap; margin-top:8px}}
   </style>
 </head>
 <body>
@@ -174,22 +160,22 @@
           <span class="chip">Fabric</span><span class="chip">Databricks</span>
           <span class="chip">SQL</span><span class="chip">Python</span>
         </div>
-        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
           <a class="btn" href="#projects">See Projects</a>
           <a class="btn" href="#contact">Hire Me</a>
         </div>
       </div>
-      <aside class="panel card">
-        <h3 style="margin:0 0 8px">Quick Facts</h3>
+
+      <!-- Tight Quick Facts box -->
+      <aside class="panel card facts">
+        <h3 style="margin:0 0 4px">Quick Facts</h3>
+        <div class="tag">2+ yrs experience • 8+ domains • End-to-End lifecycle</div>
+        <div class="divider"></div>
         <div class="list">
-          <div class="muted">2+ yrs experience • 8+ domains • End-to-End lifecycle</div>
-          <div class="divider"></div>
-          <div class="list">
-            <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
-            <a href="tel:+917575084084">+91-7575084084</a>
-            <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
-          </div>
+          <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
+          <a href="tel:+917575084084">+91-7575084084</a>
+          <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
         </div>
       </aside>
     </section>
@@ -311,7 +297,7 @@
       </div>
     </section>
 
-    <!-- CONTACT (FULL-WIDTH CTA) -->
+    <!-- CONTACT (FULL-WIDTH CTA, one-line actions on desktop) -->
     <section id="contact" class="sections">
       <div class="panel cta">
         <div class="lead">
@@ -324,86 +310,4 @@
             Email
           </a>
           <a class="btn" href="tel:+917575084084" title="+91-7575084084" aria-label="Call">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 6.2 2 2 0 0 1 4 4h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L7.1 11a16 16 0 0 0 6 6l.6-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6A2 2 0 0 1 22 16.9z" stroke="currentColor" stroke-width="2"/></svg>
-            Call
-          </a>
-          <a class="btn" href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M6 9h3v9H6zM7.5 6.5A1.5 1.5 0 1 0 7.5 3a1.5 1.5 0 0 0 0 3.5zM11 9h3v1.4c.6-1 1.7-1.6 2.9-1.6 2 0 3.6 1.3 3.6 4.2V18h-3v-3.6c0-1.2-.4-2-1.5-2s-1.8.8-1.8 2V18h-3z" fill="currentColor"/></svg>
-            LinkedIn
-          </a>
-          <a class="btn" href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.9.6-3.5-1.2-3.5-1.2-.5-1.1-1.2-1.4-1.2-1.4-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7-1.1 1.9-1.5-2.3-.3-4.8-1.1-4.8-5 0-1.1.4-2 1-2.8-.1-.2-.4-1.2.1-2.5 0 0 .9-.3 2.9 1 .8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-1.3 2.9-1 2.9-1 .6 1.3.2 2.3.1 2.5.7.8 1 1.7 1 2.8 0 3.9-2.5 4.7-4.8 5 .4.3.8 1 .8 2v3c0 .3.2.6.7.5A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">&copy; <span id="y"></span> Mit Thakkar • Built with vanilla HTML/CSS/JS</div>
-  </footer>
-
-  <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Drawer
-    const ham = document.getElementById('ham');
-    const drawer = document.getElementById('drawer');
-    ham?.addEventListener('click', ()=>{
-      const open = drawer.classList.toggle('open');
-      ham.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>drawer.classList.remove('open')));
-
-    // Maintain --header
-    const hdr = document.getElementById('hdr');
-    const setHeaderVar = ()=> document.documentElement.style.setProperty('--header', `${Math.round(hdr.getBoundingClientRect().height)}px`);
-    setHeaderVar(); new ResizeObserver(setHeaderVar).observe(hdr); window.addEventListener('resize', setHeaderVar, {passive:true});
-
-    // Segmented nav slider (robust)
-    const nav = document.getElementById('nav');
-    const slider = document.getElementById('slider');
-    const links = [...nav.querySelectorAll('a')];
-    const aboutLink = links.find(l => l.getAttribute('href') === '#about');
-
-    function setSliderTo(el){
-      if(!el) return;
-      slider.style.width = el.offsetWidth + 'px';
-      slider.style.transform = `translate3d(${el.offsetLeft}px,0,0)`;
-      links.forEach(l => l.classList.toggle('is-active', l === el));
-      drawer?.querySelectorAll('a').forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === el.getAttribute('href')));
-    }
-
-    links.forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const id = a.getAttribute('href');
-        const section = document.querySelector(id);
-        if(section){ e.preventDefault(); section.scrollIntoView({behavior:'smooth'}); }
-        setSliderTo(a);
-      });
-    });
-
-    // Intersection follow (favor About at page top)
-    const sections = [...document.querySelectorAll('.sections')];
-    const io = new IntersectionObserver((entries)=>{
-      if (window.scrollY < parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header')) - 2) { setSliderTo(aboutLink); return; }
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          const id = '#' + e.target.id;
-          const match = links.find(l=>l.getAttribute('href')===id);
-          if(match) setSliderTo(match);
-        }
-      });
-    },{rootMargin:'-60% 0px -35% 0px', threshold:.01});
-    sections.forEach(s=>io.observe(s));
-
-    const recalc = ()=> setSliderTo((window.scrollY < parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header')) ? aboutLink : nav.querySelector('.is-active')) || links[0]);
-    window.addEventListener('resize', recalc, {passive:true});
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(recalc);
-
-    requestAnimationFrame(()=> setSliderTo(aboutLink || links[0]));
-  </script>
-</body>
-</html>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 6.2 2 2 0 0 1 4 4h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L7.1
