@@ -11,7 +11,7 @@
       --bg:#0a0f14;
       --panel:#0e141b;
       --text:#e8eef5;
-      --muted:#a7b3c2;
+      --muted:#a9b3c2;
       --border:rgba(255,255,255,.08);
       --brand:#6ee7ff;
       --brand-2:#9b8cff;
@@ -23,12 +23,10 @@
     body{
       margin:0; font:15.5px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
-      /* Prevent gradient tiling lines on some zoom/DPI combos */
       background:
         radial-gradient(1200px 600px at 85% -15%, rgba(110,231,255,.06), transparent 60%),
         radial-gradient(900px 500px at -10% 15%, rgba(155,140,255,.06), transparent 55%),
         var(--bg);
-      background-repeat:no-repeat, no-repeat;
       letter-spacing:.2px;
     }
     a{color:inherit; text-decoration:none}
@@ -48,7 +46,7 @@
       border-bottom:1px solid var(--border);
     }
     .topbar{
-      display:grid; grid-template-columns:220px 1fr 320px; gap:14px; align-items:center;
+      display:grid; grid-template-columns:220px 1fr 220px; gap:14px; align-items:center;
     }
 
     /* brand */
@@ -80,7 +78,7 @@
     .nav a:hover{color:#dbe7ff}
     .nav a.is-active{color:var(--text)}
 
-    /* slider (stable at any zoom) */
+    /* The slider uses absolute left+width for subpixel-stable positioning */
     .nav .slider{
       position:absolute; top:0; left:0; height:100%;
       background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
@@ -91,10 +89,12 @@
       transform:translate3d(0,0,0);
       transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s cubic-bezier(.2,.7,.2,1);
     }
-    @media (prefers-reduced-motion: reduce){ .nav .slider{transition:none} }
+    @media (prefers-reduced-motion: reduce){
+      .nav .slider{transition:none}
+    }
 
     /* right side */
-    .right{justify-self:end; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .right{justify-self:end; display:flex; gap:10px; align-items:center;}
     .badge{
       display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
       border:1px solid var(--border); border-radius:999px; color:#cfe7ff;
@@ -138,7 +138,7 @@
     .card{padding:18px} .muted{color:var(--muted)}
     .divider{height:1px; background:var(--border); margin:12px 0}
     .list{display:grid; gap:10px}
-    .sections{scroll-margin-top:96px} /* extra margin so About wins at page top */
+    .sections{scroll-margin-top:88px}
     footer{padding:30px 0; color:var(--muted); text-align:center}
   </style>
 </head>
@@ -169,8 +169,6 @@
         <!-- right side -->
         <div class="right">
           <span class="badge" title="Currently looking">✓ Open to Opportunities</span>
-          <a class="btn" href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn" href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
           <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer">Menu</button>
         </div>
       </div>
@@ -184,8 +182,6 @@
         <a href="#certs">Certifications</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
-        <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub ↗</a>
       </nav>
     </div>
   </header>
@@ -220,8 +216,8 @@
           <div class="list">
             <a href="mailto:mitthakkar244@gmail.com">mitthakkar244@gmail.com</a>
             <a href="tel:+917575084084">+91-7575084084</a>
-            <a href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
       </aside>
@@ -352,8 +348,6 @@
         <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
           <a class="btn" href="mailto:mitthakkar244@gmail.com">Email: mitthakkar244@gmail.com</a>
           <a class="btn" href="tel:+917575084084">Call: +91-7575084084</a>
-          <a class="btn" href="https://www.linkedin.com/in/mit-thakkar24/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="btn" href="https://github.com/MitThakkar24" target="_blank" rel="noreferrer">GitHub</a>
         </div>
       </div>
     </section>
@@ -382,15 +376,17 @@
     const nav = document.getElementById('nav');
     const slider = document.getElementById('slider');
     const links = [...nav.querySelectorAll('a')];
-    const aboutLink = links.find(l => l.getAttribute('href') === '#about');
 
     function setSliderTo(el){
       if(!el) return;
+      // Use offsetLeft/offsetWidth to avoid rect rounding jitter at different zoom/DPI
       const left = el.offsetLeft;
       const width = el.offsetWidth;
+      // Translate relative to the nav container (not viewport); stable at any zoom
       slider.style.width = width + 'px';
       slider.style.transform = `translate3d(${left}px,0,0)`;
       links.forEach(l => l.classList.toggle('is-active', l === el));
+      // mirror state to mobile
       drawer.querySelectorAll('a').forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === el.getAttribute('href')));
     }
 
@@ -407,11 +403,9 @@
       });
     });
 
-    // IntersectionObserver to follow scroll (biased to About when very top)
+    // IntersectionObserver to follow scroll
     const sections = [...document.querySelectorAll('.sections')];
     const io = new IntersectionObserver((entries)=>{
-      // If near the top, force About as active so it doesn't jump to Skills
-      if (window.scrollY < 60) { setSliderTo(aboutLink); return; }
       entries.forEach(e=>{
         if(e.isIntersecting){
           const id = '#' + e.target.id;
@@ -419,29 +413,29 @@
           if(match) setSliderTo(match);
         }
       });
-    },{rootMargin:'-60% 0px -35% 0px', threshold:.01});
+    },{rootMargin:'-55% 0px -40% 0px', threshold:.01});
     sections.forEach(s=>io.observe(s));
 
-    // Resize observers: window + element
+    // Resize observers: window + element to survive zoom/OS text scaling, font loads, layout shifts
     const debounced = (fn, ms=50)=>{
       let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); };
     };
-    const recalc = debounced(()=> { 
-      // If user is at the very top, lock to About
-      const active = (window.scrollY < 60 ? aboutLink : nav.querySelector('.is-active')) || links[0];
-      setSliderTo(active);
-    }, 16);
+    const recalc = debounced(()=> setSliderTo(nav.querySelector('.is-active') || links[0]), 16);
 
+    // Window resize (also fires on zoom in most browsers)
     window.addEventListener('resize', recalc, {passive:true});
+
+    // Element resize (container width changes)
     const ro = new ResizeObserver(recalc);
     ro.observe(nav);
 
+    // Recalc after fonts load to account for width changes
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(recalc);
     }
 
     // Initialize once layout is ready
-    requestAnimationFrame(()=> setSliderTo(aboutLink || links[0]));
+    requestAnimationFrame(()=> setSliderTo(nav.querySelector('.is-active') || links[0]));
   </script>
 </body>
 </html>
