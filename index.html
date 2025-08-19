@@ -16,7 +16,7 @@
       --brand-2:#9b8cff;
       --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:16px;
-      --header:96px; /* JS keeps this updated */
+      --header:96px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -39,79 +39,42 @@
       box-shadow:var(--shadow);
     }
 
-    /* ===== HEADER ===== */
+    /* HEADER */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(140%) blur(10px);
       background:linear-gradient(to bottom, rgba(10,15,20,.92), rgba(10,15,20,.75));
       border-bottom:1px solid var(--border);
     }
-    .topbar{
-      display:grid; grid-template-columns:220px 1fr 220px; gap:14px; align-items:center;
-    }
+    .topbar{display:grid; grid-template-columns:220px 1fr 220px; gap:14px; align-items:center}
     .brand{display:flex; align-items:center; gap:12px; font-weight:700}
-    .brand .dot{
-      width:10px; height:10px; border-radius:999px;
-      background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2));
-      box-shadow:0 0 18px rgba(110,231,255,.35);
-    }
+    .brand .dot{width:10px; height:10px; border-radius:999px; background:radial-gradient(circle at 30% 30%, var(--brand), var(--brand-2)); box-shadow:0 0 18px rgba(110,231,255,.35)}
 
-    /* segmented nav (center) */
-    .navwrap{
-      justify-self:center; width:100%; max-width:760px;
-      display:flex; align-items:center; padding:6px;
-      border-radius:999px; border:1px solid var(--border);
-      background:rgba(255,255,255,.02);
-      position:relative;
-    }
-    .nav{position:relative; display:flex; align-items:center; gap:6px; width:100%}
-    .nav a{
-      display:inline-flex; align-items:center; justify-content:center;
-      flex:1 1 auto; min-width:90px; padding:10px 12px;
-      color:var(--muted); border-radius:999px; white-space:nowrap;
-      transition:color .18s ease;
-    }
+    .navwrap{justify-self:center; width:100%; max-width:760px; display:flex; padding:6px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.02); position:relative}
+    .nav{position:relative; display:flex; gap:6px; width:100%}
+    .nav a{flex:1 1 auto; min-width:90px; padding:10px 12px; color:var(--muted); border-radius:999px; text-align:center; white-space:nowrap; transition:color .18s ease}
     .nav a:hover{color:#dbe7ff}
     .nav a.is-active{color:var(--text)}
-    .nav .slider{
-      position:absolute; top:0; left:0; height:100%;
-      background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14));
-      border:1px solid var(--border); border-radius:999px;
-      box-shadow:0 10px 30px rgba(110,231,255,.08);
-      pointer-events:none; will-change:transform, width;
-      transform:translate3d(0,0,0);
-      transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s cubic-bezier(.2,.7,.2,1);
-    }
+    .nav .slider{position:absolute; top:0; left:0; height:100%; background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14)); border:1px solid var(--border); border-radius:999px; box-shadow:0 10px 30px rgba(110,231,255,.08); pointer-events:none; transform:translate3d(0,0,0); transition:transform .28s cubic-bezier(.2,.7,.2,1), width .28s cubic-bezier(.2,.7,.2,1)}
     @media (prefers-reduced-motion: reduce){ .nav .slider{transition:none} }
 
-    /* right chip only (no GitHub/LinkedIn buttons up here) */
     .right{justify-self:end; display:flex; gap:10px; align-items:center}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px;
-      border:1px solid var(--border); border-radius:999px; color:#cfe7ff;
-      background:rgba(110,231,255,.05); white-space:nowrap;
-    }
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--border); border-radius:999px; color:#cfe7ff; background:rgba(110,231,255,.05)}
     .ham{display:none}
-    @media (max-width: 980px){
-      .topbar{grid-template-columns:1fr auto auto}
-      .navwrap{display:none}
-      .ham{display:inline-flex; padding:10px 12px; border:1px solid var(--border); border-radius:12px; color:#cfe7ff}
-    }
-
-    /* mobile drawer (no external links here either) */
+    @media (max-width:980px){ .topbar{grid-template-columns:1fr auto auto} .navwrap{display:none} .ham{display:inline-flex; padding:10px 12px; border:1px solid var(--border); border-radius:12px; color:#cfe7ff} }
     .drawer{display:none; padding:10px; margin-top:10px}
     .drawer.open{display:block}
-    .drawer a{
-      display:block; padding:12px 14px; border:1px solid var(--border); border-radius:12px;
-      color:var(--muted); margin-bottom:8px; background:rgba(255,255,255,.02)
-    }
+    .drawer a{display:block; padding:12px 14px; border:1px solid var(--border); border-radius:12px; color:var(--muted); margin-bottom:8px; background:rgba(255,255,255,.02)}
     .drawer a.is-active{color:var(--text); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
 
-    /* ===== CONTENT ===== */
+    /* CONTENT */
     .hero{
-      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center; padding:40px 0 8px;
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px;
+      align-items:start;            /* <-- changed */
+      padding:40px 0 8px;
     }
-    @media (max-width: 980px){ .hero{grid-template-columns:1fr; padding:28px 0} }
+    .hero > aside{ align-self:start } /* <-- ensures card sticks to the top */
+    @media (max-width:980px){ .hero{grid-template-columns:1fr; padding:28px 0} }
     h1{font-size:clamp(32px, 3.6vw, 52px); line-height:1.1; margin:6px 0 12px}
     .subtitle{color:var(--muted); font-size:clamp(15px, 1.7vw, 18px)}
     .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
@@ -119,26 +82,22 @@
 
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:26px}
     .col-8{grid-column:span 8} .col-4{grid-column:span 4}
-    @media (max-width: 980px){ .col-8,.col-4{grid-column:1/-1} }
+    @media (max-width:980px){ .col-8,.col-4{grid-column:1/-1} }
     .card{padding:18px} .muted{color:var(--muted)}
     .divider{height:1px; background:var(--border); margin:12px 0}
     .list{display:grid; gap:10px}
-    .sections{scroll-margin-top:calc(var(--header) + 4px)} /* keeps About active at very top */
+    .sections{scroll-margin-top:calc(var(--header) + 4px)}
     footer{padding:30px 0; color:var(--muted); text-align:center}
     .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(135deg, rgba(110,231,255,.14), rgba(155,140,255,.14))}
   </style>
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
   <header id="hdr">
     <div class="container">
       <div class="topbar">
         <div class="brand">
-          <span class="dot" aria-hidden="true"></span>
-          <div>Mit Thakkar</div>
+          <span class="dot" aria-hidden="true"></span><div>Mit Thakkar</div>
         </div>
-
-        <!-- centered segmented nav -->
         <div class="navwrap" aria-label="Primary">
           <div class="nav" id="nav">
             <span class="slider" id="slider" style="width:0"></span>
@@ -151,15 +110,11 @@
             <a href="#contact">Contact</a>
           </div>
         </div>
-
-        <!-- right: only availability chip -->
         <div class="right">
           <span class="badge">✓ Open to Opportunities</span>
           <button class="ham" id="ham" aria-expanded="false" aria-controls="drawer">Menu</button>
         </div>
       </div>
-
-      <!-- mobile drawer -->
       <nav id="drawer" class="drawer panel" aria-label="Mobile Menu">
         <a href="#about" class="is-active">About</a>
         <a href="#skills">Skills</a>
@@ -172,7 +127,6 @@
     </div>
   </header>
 
-  <!-- ===== MAIN ===== -->
   <main class="container">
     <!-- HERO -->
     <section id="about" class="hero sections">
@@ -353,21 +307,14 @@
       const open = drawer.classList.toggle('open');
       ham.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-    drawer?.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=>drawer.classList.remove('open'));
-    });
+    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>drawer.classList.remove('open')));
 
-    // Keep a live --header var for accurate scroll-margin / top detection
+    // Maintain --header for accurate scroll-margin
     const hdr = document.getElementById('hdr');
-    const setHeaderVar = ()=> {
-      const h = hdr.getBoundingClientRect().height;
-      document.documentElement.style.setProperty('--header', `${Math.round(h)}px`);
-    };
-    setHeaderVar();
-    new ResizeObserver(setHeaderVar).observe(hdr);
-    window.addEventListener('resize', setHeaderVar, {passive:true});
+    const setHeaderVar = ()=> document.documentElement.style.setProperty('--header', `${Math.round(hdr.getBoundingClientRect().height)}px`);
+    setHeaderVar(); new ResizeObserver(setHeaderVar).observe(hdr); window.addEventListener('resize', setHeaderVar, {passive:true});
 
-    // Segmented nav slider (robust across zoom)
+    // Robust segmented nav slider
     const nav = document.getElementById('nav');
     const slider = document.getElementById('slider');
     const links = [...nav.querySelectorAll('a')];
@@ -385,20 +332,14 @@
       a.addEventListener('click', (e)=>{
         const id = a.getAttribute('href');
         const section = document.querySelector(id);
-        if(section){
-          e.preventDefault();
-          section.scrollIntoView({behavior:'smooth'});
-        }
+        if(section){ e.preventDefault(); section.scrollIntoView({behavior:'smooth'}); }
         setSliderTo(a);
       });
     });
 
-    // IntersectionObserver to follow scroll (favor About at the very top)
     const sections = [...document.querySelectorAll('.sections')];
     const io = new IntersectionObserver((entries)=>{
-      if (window.scrollY < parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header')) - 2) {
-        setSliderTo(aboutLink); return;
-      }
+      if (window.scrollY < parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header')) - 2) { setSliderTo(aboutLink); return; }
       entries.forEach(e=>{
         if(e.isIntersecting){
           const id = '#' + e.target.id;
@@ -409,12 +350,9 @@
     },{rootMargin:'-60% 0px -35% 0px', threshold:.01});
     sections.forEach(s=>io.observe(s));
 
-    // Recalc on resize / fonts ready
     const recalc = ()=> setSliderTo((window.scrollY < parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header')) ? aboutLink : nav.querySelector('.is-active')) || links[0]);
     window.addEventListener('resize', recalc, {passive:true});
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(recalc);
-
-    // Init
     requestAnimationFrame(()=> setSliderTo(aboutLink || links[0]));
   </script>
 </body>
