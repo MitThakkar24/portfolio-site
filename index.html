@@ -426,7 +426,7 @@
     const debounced = (fn, ms=50)=>{
       let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn(...args), ms); };
     };
-    const recalc = debounced(()=> {
+    const recalc = debounced(()=> { 
       // If user is at the very top, lock to About
       const active = (window.scrollY < 60 ? aboutLink : nav.querySelector('.is-active')) || links[0];
       setSliderTo(active);
